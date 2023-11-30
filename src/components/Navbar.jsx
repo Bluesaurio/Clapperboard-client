@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-function Navbar() {
+function Navbar(props) {
   const { isLoggedIn, authenticateUser } = useContext(AuthContext);
 
   const redirect = useNavigate();
@@ -19,6 +19,11 @@ function Navbar() {
     return (
       <nav>
         <Link to="/">Home</Link>
+        <span> | </span>
+        <Link to="/about">About</Link>
+        <span> | </span>
+        <Link to="/profile">Profile</Link>
+        <span> | </span>
         <button onClick={handleLogOut}>Log Out</button>
       </nav>
     );
@@ -26,8 +31,12 @@ function Navbar() {
     return (
       <nav>
         <Link to="/">Home</Link>
-        <Link to="/register">Create Account</Link>
+        <span> | </span>
+        <Link to="/about">About</Link>
+        <span> | </span>
         <Link to="/login">Log In</Link>
+        <span> | </span>
+        <Link to="/register">Create Account</Link>
       </nav>
     );
   }
