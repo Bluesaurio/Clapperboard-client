@@ -98,6 +98,7 @@ function ProfileEdit() {
         <br />
         <label htmlFor="pronouns">Pronouns: </label>
         <select name="pronouns" onChange={handlePronouns} value={pronouns}>
+          <option value={""}></option>
           <option value="he/him">he/him</option>
           <option value="she/her">she/her</option>
           <option value="they/them">they/them</option>
