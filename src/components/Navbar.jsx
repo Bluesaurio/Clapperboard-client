@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 
-function Navbar(props) {
-  const { isLoggedIn, authenticateUser } = useContext(AuthContext);
+function Navbar() {
+  const { isLoggedIn, authenticateUser, loggedUser } = useContext(AuthContext);
 
   const redirect = useNavigate();
 
@@ -18,11 +18,11 @@ function Navbar(props) {
   if (isLoggedIn) {
     return (
       <nav>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
         <span> | </span>
-        <Link to="/about">About</Link>
+        <NavLink to="/about">About</NavLink>
         <span> | </span>
-        <Link to="/profile">Profile</Link>
+        <NavLink to={`/profile/${loggedUser._id}`}>Profile</NavLink>
         <span> | </span>
         <button onClick={handleLogOut}>Log Out</button>
       </nav>
@@ -30,13 +30,13 @@ function Navbar(props) {
   } else {
     return (
       <nav>
-        <Link to="/">Home</Link>
+        <NavLink to="/">Home</NavLink>
         <span> | </span>
-        <Link to="/about">About</Link>
+        <NavLink to="/about">About</NavLink>
         <span> | </span>
-        <Link to="/login">Log In</Link>
+        <NavLink to="/login">Log In</NavLink>
         <span> | </span>
-        <Link to="/register">Create Account</Link>
+        <NavLink to="/register">Create Account</NavLink>
       </nav>
     );
   }

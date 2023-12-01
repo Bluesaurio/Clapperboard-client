@@ -26,7 +26,7 @@ function AuthWrapper(props) {
     authenticateUser();
   }, []);
 
-  const passedContext = { authenticateUser, isLoggedIn };
+  const passedContext = { authenticateUser, isLoggedIn, loggedUser };
 
   if (isLoading) {
     return <h3>Validando credenciales...</h3>;
