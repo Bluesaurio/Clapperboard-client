@@ -9,6 +9,7 @@ import Error from "./pages/error/Error";
 import NotFound from "./pages/error/NotFound";
 import About from "./pages/About";
 import Profile from "./pages/profile/Profile";
+import ProfileEdit from "./pages/profile/ProfileEdit";
 
 // components
 import Navbar from "./components/Navbar";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile/:userId" element={<Profile />} />
+        <Route path="/profile/edit" element={<ProfileEdit />} />
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />

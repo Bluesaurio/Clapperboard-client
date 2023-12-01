@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth.context";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import service from "../../services/config";
 
 function Profile() {
-  const { isLoggedIn, authenticateUser, loggedUser } = useContext(AuthContext);
+  const { loggedUser } = useContext(AuthContext);
   console.log(loggedUser);
 
   const [userData, setUserData] = useState(null);
@@ -28,7 +28,6 @@ function Profile() {
   if (isLoading) {
     return <h3>Buscando data</h3>;
   }
-  // llamar al backend para conseguir más datos del user, y poder rellenar su perfil con nombre, img, etc
 
   return (
     <div>
@@ -39,7 +38,7 @@ function Profile() {
         <span> | </span>
         <Link to={`/profile/${loggedUser._id}/watchlist`}>Watchlist</Link>
         <span> | </span>
-        <Link to={`/profile/${loggedUser._id}/lists`}>Lists</Link>
+        <NavLink to={`/profile/${loggedUser._id}/lists`}>Lists</NavLink>
       </nav>
 
       <div>
@@ -51,7 +50,9 @@ function Profile() {
         {userData.bio && <p>{userData.bio}</p>}
         {userData.location && <p>{userData.location}</p>}
         <br />
-        <button>Editar perfil</button>
+        <Link to={"/profile/edit"}>
+          <button>Editar perfil</button>
+        </Link>
       </div>
     </div>
   );
