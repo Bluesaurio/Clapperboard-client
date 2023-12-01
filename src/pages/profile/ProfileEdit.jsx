@@ -17,11 +17,33 @@ function ProfileEdit() {
   const [bio, setBio] = useState("");
   const [pronouns, setPronouns] = useState("");
 
+  const [imageUrl, setImageUrl] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
+
   const handleFirstName = (e) => setFirstName(e.target.value);
   const handleLastName = (e) => setLastName(e.target.value);
   const handleLocation = (e) => setLocation(e.target.value);
   const handleBio = (e) => setBio(e.target.value);
   const handlePronouns = (e) => setPronouns(e.target.value);
+  const handleFileUpload = async (e) => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    if (!e.target.files[0]) {
+      return;
+    }
+    setIsUploading(true);
+
+    const uploadData = new FormData();
+    uploadData.append("image", e.target.files[0]);
+
+    try {
+      const response = await service.post("/upload", uploadData);
+      setImageUrl(response.data.imageUrl);
+      setIsUploading(false);
+    } catch (error) {
+      redirect("/error");
+    }
+  };
 
   useEffect(() => {
     getData();
@@ -46,6 +68,7 @@ function ProfileEdit() {
     try {
       const response = await service.put("/profile", updateProfile);
       console.log(response);
+      redirect(`/profile/${loggedUser._id}`);
     } catch (error) {
       console.log(error);
       redirect("/error");
@@ -63,27 +86,24 @@ function ProfileEdit() {
         <input
           type="text"
           name="firstName"
-          defaultValue={userData.firstName}
           onChange={handleFirstName}
-          value={firstName}
+          defaultValue={userData.firstName}
         />
         <br />
         <label htmlFor="lastName">Last name: </label>
         <input
           type="text"
           name="lastName"
-          defaultValue={userData.lastName}
           onChange={handleLastName}
-          value={lastName}
+          defaultValue={userData.lastName}
         />
         <br />
         <label htmlFor="location">Location: </label>
         <input
           type="text"
           name="location"
-          defaultValue={userData.location}
           onChange={handleLocation}
-          value={location}
+          defaultValue={userData.location}
         />
         <br />
         <label htmlFor="bio">Bio: </label>
@@ -91,24 +111,45 @@ function ProfileEdit() {
           name="bio"
           rows="5"
           cols="33"
-          defaultValue={userData.bio}
           onChange={handleBio}
-          value={bio}
+          defaultValue={userData.bio}
         />
         <br />
         <label htmlFor="pronouns">Pronouns: </label>
-        <select name="pronouns" onChange={handlePronouns} value={pronouns}>
+        <select
+          name="pronouns"
+          onChange={handlePronouns}
+          defaultValue={userData.pronouns}
+        >
           <option value={""}></option>
           <option value="he/him">he/him</option>
           <option value="she/her">she/her</option>
           <option value="they/them">they/them</option>
         </select>
         <br />
-        <img src={userData.profilePic} alt={userData.username} width={100} />
         <br />
-        <button>Change your avatar</button>
+        <img
+          src={imageUrl ? imageUrl : userData.profilePic}
+          alt={userData.username}
+          width={200}
+        />
+        <div>
+          <label>Image: </label>
+          <input
+            type="file"
+            name="image"
+            onChange={handleFileUpload}
+            disabled={isUploading}
+          />
+        </div>
+        {isUploading ? <h3>... uploading image</h3> : null}
+        {/* {imageUrl ? (
+          <div>
+            <img src={imageUrl} alt="img" width={200} />
+          </div>
+        ) : null} */}
         <br />
-        <br />
+
         <button>Confirm changes</button>
         <Link to={`/profile/${userData._id}`}>
           <button>Back</button>
