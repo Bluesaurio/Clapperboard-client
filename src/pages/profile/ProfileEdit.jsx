@@ -11,20 +11,17 @@ function ProfileEdit() {
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [location, setLocation] = useState("");
-  const [bio, setBio] = useState("");
-  const [pronouns, setPronouns] = useState("");
-
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
-  const handleFirstName = (e) => setFirstName(e.target.value);
-  const handleLastName = (e) => setLastName(e.target.value);
-  const handleLocation = (e) => setLocation(e.target.value);
-  const handleBio = (e) => setBio(e.target.value);
-  const handlePronouns = (e) => setPronouns(e.target.value);
+  const handleInputChange = (e) => {
+    const clone = JSON.parse(JSON.stringify(userData));
+
+    clone[e.target.name] = e.target.value;
+
+    setUserData(clone);
+  };
+
   const handleFileUpload = async (e) => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
 
@@ -52,7 +49,6 @@ function ProfileEdit() {
   const getData = async () => {
     try {
       const response = await service.get(`/profile/${loggedUser._id}`);
-      console.log(response.data);
       setUserData(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -63,10 +59,8 @@ function ProfileEdit() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updateProfile = { firstName, lastName, location, bio, pronouns };
-
     try {
-      const response = await service.put("/profile", updateProfile);
+      const response = await service.put("/profile", userData);
       console.log(response);
       redirect(`/profile/${loggedUser._id}`);
     } catch (error) {
@@ -86,7 +80,7 @@ function ProfileEdit() {
         <input
           type="text"
           name="firstName"
-          onChange={handleFirstName}
+          onChange={handleInputChange}
           defaultValue={userData.firstName}
         />
         <br />
@@ -94,7 +88,7 @@ function ProfileEdit() {
         <input
           type="text"
           name="lastName"
-          onChange={handleLastName}
+          onChange={handleInputChange}
           defaultValue={userData.lastName}
         />
         <br />
@@ -102,7 +96,7 @@ function ProfileEdit() {
         <input
           type="text"
           name="location"
-          onChange={handleLocation}
+          onChange={handleInputChange}
           defaultValue={userData.location}
         />
         <br />
@@ -111,14 +105,14 @@ function ProfileEdit() {
           name="bio"
           rows="5"
           cols="33"
-          onChange={handleBio}
+          onChange={handleInputChange}
           defaultValue={userData.bio}
         />
         <br />
         <label htmlFor="pronouns">Pronouns: </label>
         <select
           name="pronouns"
-          onChange={handlePronouns}
+          onChange={handleInputChange}
           defaultValue={userData.pronouns}
         >
           <option value={""}></option>

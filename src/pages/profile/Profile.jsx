@@ -5,7 +5,6 @@ import service from "../../services/config";
 
 function Profile() {
   const { loggedUser } = useContext(AuthContext);
-  console.log(loggedUser);
 
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
