@@ -14,7 +14,6 @@ function ProfileEdit() {
   const [isUploading, setIsUploading] = useState(false);
 
   const handleInputChange = (e) => {
-    // Clonamos el userData
     const clone = JSON.parse(JSON.stringify(userData));
 
     clone[e.target.name] = e.target.value;
@@ -34,10 +33,12 @@ function ProfileEdit() {
     uploadData.append("image", e.target.files[0]);
 
     try {
-      const response = await service.post("/upload", uploadData);
+      const response = await service.patch("/profile/image", uploadData);
+
       setImageUrl(response.data.imageUrl);
       setIsUploading(false);
     } catch (error) {
+      console.log(error);
       redirect("/error");
     }
   };
