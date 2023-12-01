@@ -10,11 +10,11 @@ function ProfileEdit() {
 
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const handleInputChange = (e) => {
+    // Clonamos el userData
     const clone = JSON.parse(JSON.stringify(userData));
 
     clone[e.target.name] = e.target.value;
