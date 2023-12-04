@@ -8,7 +8,7 @@ function MovieDetails() {
 
   const [movieDetails, setMovieDetails] = useState([null]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [AllReviews, setAllReviews] = useState([]);
   useEffect(() => {
     getData();
   }, []);
@@ -16,6 +16,7 @@ function MovieDetails() {
   const getData = async () => {
     try {
       const response = await service.get(`/movie/${params.movieId}/details`);
+      // const getReviews = await (llamada al BE para sacar reviews )
       console.log(response.data);
       setMovieDetails(response.data);
       setIsLoading(false);
@@ -43,7 +44,7 @@ function MovieDetails() {
         })}
       </ul>
       <p>Release date: {movieDetails.release_date}</p>
-
+      {/* Añadir aqui el map de AllReviews */}
       <AddReview />
     </div>
   );
