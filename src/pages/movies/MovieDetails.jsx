@@ -8,7 +8,8 @@ function MovieDetails() {
 
   const [movieDetails, setMovieDetails] = useState([null]);
   const [isLoading, setIsLoading] = useState(true);
-  const [AllReviews, setAllReviews] = useState([]);
+  const [allReviews, setAllReviews] = useState(null);
+
   useEffect(() => {
     getData();
   }, []);
@@ -16,15 +17,16 @@ function MovieDetails() {
   const getData = async () => {
     try {
       const response = await service.get(`/movie/${params.movieId}/details`);
-      // const getReviews = await (llamada al BE para sacar reviews )
+      const getReviews = await service.get(`/review/${params.movieId}`);
       console.log(response.data);
       setMovieDetails(response.data);
+      console.log(getReviews.data);
+      setAllReviews(getReviews.data);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
   };
-
   if (isLoading) {
     return <h3>Buscando data</h3>;
   }
@@ -44,7 +46,21 @@ function MovieDetails() {
         })}
       </ul>
       <p>Release date: {movieDetails.release_date}</p>
-      {/* Añadir aqui el map de AllReviews */}
+
+      {allReviews.map((eachReview) => {
+        return (
+          <div key={eachReview._id}>
+            {eachReview.rating === 5 && <p>⭐⭐⭐⭐⭐</p>}
+            {eachReview.rating === 4 && <p>⭐⭐⭐⭐</p>}
+            {eachReview.rating === 3 && <p>⭐⭐⭐</p>}
+            {eachReview.rating === 2 && <p>⭐⭐</p>}
+            {eachReview.rating === 1 && <p>⭐</p>}
+            <p>{eachReview.text} </p>
+            <p>Review by: {eachReview.creator}</p>
+          </div>
+        );
+      })}
+
       <AddReview />
     </div>
   );
