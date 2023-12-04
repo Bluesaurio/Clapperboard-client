@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import service from "../../services/config";
 import { Link, useParams } from "react-router-dom";
+import AddReview from "../../components/AddReview";
 
 function MovieDetails() {
   const params = useParams();
@@ -42,6 +43,8 @@ function MovieDetails() {
         })}
       </ul>
       <p>Release date: {movieDetails.release_date}</p>
+
+      <AddReview />
     </div>
   );
 }
