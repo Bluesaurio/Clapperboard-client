@@ -29,11 +29,11 @@ function Home() {
     <div>
       {popularMovies.map((eachMovie) => {
         return (
-          <Link to={`movie/${eachMovie.id}`} key={eachMovie.id}>
-            <p>{eachMovie.original_title}</p>
+          <Link to={`movie/${eachMovie.id}/details`} key={eachMovie.id}>
             <img
               src={`https://www.themoviedb.org/t/p/w200/${eachMovie.poster_path}`}
             ></img>
+            <p>{eachMovie.title}</p>
           </Link>
         );
       })}

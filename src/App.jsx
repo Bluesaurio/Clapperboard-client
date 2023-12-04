@@ -13,6 +13,7 @@ import ProfileEdit from "./pages/profile/ProfileEdit";
 
 // components
 import Navbar from "./components/Navbar";
+import MovieDetails from "./pages/movies/MovieDetails";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/profile/edit" element={<ProfileEdit />} />
+        <Route path="/movie/:movieId/details" element={<MovieDetails />} />
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />
