@@ -38,7 +38,7 @@ function MovieDetails() {
       <h3>Genres</h3>
       <ul>
         {movieDetails.genres.map((eachGenre) => {
-          return <li>{eachGenre.name}</li>;
+          return <li key={eachGenre.id}>{eachGenre.name}</li>;
         })}
       </ul>
       <p>Release date: {movieDetails.release_date}</p>

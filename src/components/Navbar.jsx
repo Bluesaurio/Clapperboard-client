@@ -1,9 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import Search from "../components/Search";
 
 function Navbar() {
   const { isLoggedIn, authenticateUser, loggedUser } = useContext(AuthContext);
+
+  const [movies, setMovies] = useState("");
 
   const redirect = useNavigate();
 
@@ -18,6 +21,8 @@ function Navbar() {
   if (isLoggedIn) {
     return (
       <nav>
+        <Search movies={movies} setMovies={setMovies} />
+
         <NavLink to="/">Home</NavLink>
         <span> | </span>
         <NavLink to="/about">About</NavLink>
@@ -30,6 +35,8 @@ function Navbar() {
   } else {
     return (
       <nav>
+        <Search movies={movies} setMovies={setMovies} />
+
         <NavLink to="/">Home</NavLink>
         <span> | </span>
         <NavLink to="/about">About</NavLink>
