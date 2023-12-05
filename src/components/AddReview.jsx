@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import service from "../services/config";
 import { Rating } from "react-simple-star-rating";
 
-function AddReview() {
+function AddReview(props) {
   const [rating, setRating] = useState(0);
   const redirect = useNavigate();
   const params = useParams();
@@ -27,6 +27,7 @@ function AddReview() {
         `/review/${params.movieId}`,
         filmReview
       );
+      props.getData();
       console.log(response);
     } catch (error) {
       console.log(error);

@@ -61,7 +61,7 @@ function MovieDetails() {
         );
       })}
 
-      <AddReview />
+      <AddReview getData={getData} />
     </div>
   );
 }
