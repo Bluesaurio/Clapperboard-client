@@ -12,6 +12,7 @@ import Profile from "./pages/profile/Profile";
 import ProfileEdit from "./pages/profile/ProfileEdit";
 import MovieDetails from "./pages/movies/MovieDetails";
 import MovieResults from "./pages/movies/MovieResults";
+import Reviews from "./pages/reviews/Reviews";
 
 // components
 import Navbar from "./components/Navbar";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/profile/edit" element={<ProfileEdit />} />
         <Route path="/movie/:movieId/details" element={<MovieDetails />} />
         <Route path="/movie/:search/results" element={<MovieResults />} />
+        <Route path="/profile/:userId/reviews" element={<Reviews />} />
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />
