@@ -21,13 +21,6 @@ function Reviews() {
       const response = await service.get(`/profile/${params.userId}/reviews`);
       console.log(response.data);
       setAllUserReviews(response.data);
-
-      response.data.forEach((eachResponse) => {
-        return setRating(eachResponse.rating);
-      });
-      response.data.forEach((eachResponse) => {
-        return setReviewText(eachResponse.text);
-      });
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -44,48 +37,54 @@ function Reviews() {
     setRating(rate);
   };
 
+  const handleSubmit = (reviewId) => {};
+
   const handleChangeIsEditable = (reviewId) => {
+    // para limpiar los campos de estados de reseñàs a editar al cambier de edit o cerrar edit
+    setRating(null);
+    setReviewText(null);
     setIsThisEditable(reviewId);
   };
 
   if (isLoading) {
     return <h3>Searching</h3>;
   }
-
+  // Así queda el return
   return (
     <div>
       {allUserReviews.map((eachReview, index) => {
+        console.log(eachReview.rating);
         return (
-          <div>
+          <div key={eachReview._id}>
             {isThisEditable == eachReview._id ? (
-              <p>{eachReview.rating}</p>
-            ) : (
-              <Rating onClick={handleRating} value={rating} />
-            )}
-            {isThisEditable == eachReview._id ? (
-              <p>{eachReview.text}</p>
-            ) : (
-              <form>
-                <textarea
-                  name={reviewText}
-                  cols="30"
-                  rows="10"
-                  onChange={handleReviewText}
-                  value={reviewText}
-                ></textarea>
-              </form>
-            )}
-
-            {isThisEditable == eachReview._id ? (
-              <button onClick={() => handleChangeIsEditable(index)}>
-                Editar
-              </button>
+              <div>
+                <Rating
+                  onClick={handleRating}
+                  initialValue={eachReview.rating}
+                />
+                <form onSubmit={() => handleSubmit(eachReview._id)}>
+                  <textarea
+                    name={eachReview.text}
+                    cols="30"
+                    rows="10"
+                    onChange={handleReviewText}
+                    defaultValue={eachReview.text}
+                  ></textarea>
+                </form>
+                <div>
+                  <button>Submit changes</button>
+                  <br />
+                  <button onClick={() => handleChangeIsEditable(null)}>
+                    Back
+                  </button>
+                </div>
+              </div>
             ) : (
               <div>
-                <button>Submit changes</button>
-                <br />
-                <button onClick={() => handleChangeIsEditable(index)}>
-                  Back
+                <p>{eachReview.rating}</p>
+                <p>{eachReview.text}</p>
+                <button onClick={() => handleChangeIsEditable(eachReview._id)}>
+                  Editar
                 </button>
               </div>
             )}
