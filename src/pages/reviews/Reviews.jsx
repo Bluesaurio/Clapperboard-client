@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../../services/config";
+import { Rating } from "react-simple-star-rating";
 
 function Reviews() {
   const params = useParams();
   const redirect = useNavigate();
   const [allUserReviews, setAllUserReviews] = useState(null);
-  const [movieData, setMovieData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isThisEditable, setIsThisEditable] = useState(false);
+  const [rating, setRating] = useState(null);
+  const [reviewText, setReviewText] = useState(null);
 
   useEffect(() => {
     getData();
@@ -19,22 +22,12 @@ function Reviews() {
       console.log(response.data);
       setAllUserReviews(response.data);
 
-      const moviesDetails = [];
-
-      await response.data.forEach(async (eachReview) => {
-        try {
-          const oneMovie = await service.get(
-            `/movie/${eachReview.filmId}/details`
-          );
-          console.log(oneMovie.data);
-          moviesDetails.push(oneMovie.data);
-        } catch (error) {
-          console.log(error);
-          moviesDetails.push(null);
-        }
+      response.data.forEach((eachResponse) => {
+        return setRating(eachResponse.rating);
       });
-
-      setMovieData(moviesDetails);
+      response.data.forEach((eachResponse) => {
+        return setReviewText(eachResponse.text);
+      });
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -42,6 +35,18 @@ function Reviews() {
     }
   };
 
+  const handleReviewText = (e) => {
+    setReviewText(e.target.value);
+  };
+
+  const handleRating = (rate) => {
+    console.log(rate);
+    setRating(rate);
+  };
+
+  const handleChangeIsEditable = () => {
+    setIsThisEditable(!isThisEditable);
+  };
 
   if (isLoading) {
     return <h3>Searching</h3>;
@@ -52,16 +57,34 @@ function Reviews() {
       {allUserReviews.map((eachReview) => {
         return (
           <div>
-            <p>{eachReview.rating}</p>
-            <p>{eachReview.text}</p>
-            {movieData.map((eachMovie) => {
-              return (
-                <img
-                  src={`https://www.themoviedb.org/t/p/w200/${eachMovie.poster_path}`}
-                />
-              );
-            })}
-            <button onClick={}>Editar</button>
+            {isThisEditable === false ? (
+              <p>{eachReview.rating}</p>
+            ) : (
+              <Rating onClick={handleRating} value={rating} />
+            )}
+            {isThisEditable === false ? (
+              <p>{eachReview.text}</p>
+            ) : (
+              <form>
+                <textarea
+                  name={reviewText}
+                  cols="30"
+                  rows="10"
+                  onChange={handleReviewText}
+                  value={reviewText}
+                ></textarea>
+              </form>
+            )}
+
+            {isThisEditable === false ? (
+              <button onClick={handleChangeIsEditable}>Editar</button>
+            ) : (
+              <div>
+                <button>Submit changes</button>
+                <br />
+                <button onClick={handleChangeIsEditable}>Back</button>
+              </div>
+            )}
           </div>
         );
       })}
