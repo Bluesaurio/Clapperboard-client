@@ -8,7 +8,7 @@ function Reviews() {
   const redirect = useNavigate();
   const [allUserReviews, setAllUserReviews] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isThisEditable, setIsThisEditable] = useState(false);
+  const [isThisEditable, setIsThisEditable] = useState(null);
   const [rating, setRating] = useState(null);
   const [reviewText, setReviewText] = useState(null);
 
@@ -44,8 +44,8 @@ function Reviews() {
     setRating(rate);
   };
 
-  const handleChangeIsEditable = () => {
-    setIsThisEditable(!isThisEditable);
+  const handleChangeIsEditable = (reviewId) => {
+    setIsThisEditable(reviewId);
   };
 
   if (isLoading) {
@@ -54,15 +54,15 @@ function Reviews() {
 
   return (
     <div>
-      {allUserReviews.map((eachReview) => {
+      {allUserReviews.map((eachReview, index) => {
         return (
           <div>
-            {isThisEditable === false ? (
+            {isThisEditable == eachReview._id ? (
               <p>{eachReview.rating}</p>
             ) : (
               <Rating onClick={handleRating} value={rating} />
             )}
-            {isThisEditable === false ? (
+            {isThisEditable == eachReview._id ? (
               <p>{eachReview.text}</p>
             ) : (
               <form>
@@ -76,13 +76,17 @@ function Reviews() {
               </form>
             )}
 
-            {isThisEditable === false ? (
-              <button onClick={handleChangeIsEditable}>Editar</button>
+            {isThisEditable == eachReview._id ? (
+              <button onClick={() => handleChangeIsEditable(index)}>
+                Editar
+              </button>
             ) : (
               <div>
                 <button>Submit changes</button>
                 <br />
-                <button onClick={handleChangeIsEditable}>Back</button>
+                <button onClick={() => handleChangeIsEditable(index)}>
+                  Back
+                </button>
               </div>
             )}
           </div>
