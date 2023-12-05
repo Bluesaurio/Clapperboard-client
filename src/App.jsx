@@ -15,12 +15,12 @@ import MovieResults from "./pages/movies/MovieResults";
 import Reviews from "./pages/reviews/Reviews";
 
 // components
-import Navbar from "./components/Navbar";
+import AppNavbar from "./components/AppNavbar";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <AppNavbar />
 
       <br />
       <hr />

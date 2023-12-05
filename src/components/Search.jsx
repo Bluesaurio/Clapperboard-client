@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// Bootstrap
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+
 function Search() {
   const [queryValue, setQueryValue] = useState("");
 
@@ -16,16 +20,30 @@ function Search() {
   };
 
   return (
-    <div>
-      <label htmlFor="query">Buscar: </label>
-      <input
-        type="text"
-        name="query"
+    <Form className="d-flex">
+      <Form.Control
+        type="search"
+        placeholder="Search"
+        className="me-2"
+        aria-label="Search"
         onChange={handleQueryChange}
         value={queryValue}
       />
-      <button onClick={handleSearch}>Search</button>
-    </div>
+      <Button variant="outline-success" onClick={handleSearch}>
+        Search
+      </Button>
+    </Form>
+
+    // <div>
+    //   <label htmlFor="query">Buscar: </label>
+    //   <input
+    //     type="text"
+    //     name="query"
+    //     onChange={handleQueryChange}
+    //     value={queryValue}
+    //   />
+    //   <button onClick={handleSearch}>Search</button>
+    // </div>
   );
 }
 
