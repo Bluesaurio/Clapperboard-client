@@ -46,7 +46,8 @@ function Reviews() {
   };
 
   const handleChangeIsEditable = (reviewId) => {
-    console.log(reviewId);
+    setRating(null);
+    setReviewText(null);
     setIsThisEditable(reviewId);
   };
 
@@ -56,7 +57,7 @@ function Reviews() {
 
   return (
     <div>
-      {allUserReviews.map((eachReview) => {
+      {allUserReviews.map((eachReview, index) => {
         return (
           <div>
             {isThisEditable == eachReview._id ? (
@@ -79,14 +80,14 @@ function Reviews() {
             )}
 
             {isThisEditable == eachReview._id ? (
-              <button onClick={() => handleChangeIsEditable(eachReview._id)}>
+              <button onClick={() => handleChangeIsEditable(index)}>
                 Editar
               </button>
             ) : (
               <div>
                 <button>Submit changes</button>
                 <br />
-                <button onClick={() => handleChangeIsEditable(eachReview._id)}>
+                <button onClick={() => handleChangeIsEditable(index)}>
                   Back
                 </button>
               </div>

@@ -5,9 +5,9 @@ import { Rating } from "react-simple-star-rating";
 
 function AddReview(props) {
   const [rating, setRating] = useState(0);
-  const redirect = useNavigate();
-  const params = useParams();
   const [reviewText, setReviewText] = useState("");
+  const params = useParams();
+  const redirect = useNavigate();
 
   const handleReviewText = (e) => {
     setReviewText(e.target.value);
