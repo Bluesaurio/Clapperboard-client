@@ -26,17 +26,23 @@ function Home() {
   }
 
   return (
-    <div>
-      {popularMovies.map((eachMovie) => {
-        return (
-          <Link to={`movie/${eachMovie.id}/details`} key={eachMovie.id}>
-            <img
-              src={`https://www.themoviedb.org/t/p/w200/${eachMovie.poster_path}`}
-            ></img>
-            <p>{eachMovie.title}</p>
-          </Link>
-        );
-      })}
+    <div className="movie-list-container">
+      {popularMovies.map((eachMovie) => (
+        <Link
+          to={`movie/${eachMovie.id}/details`}
+          key={eachMovie.id}
+          className="movie-item"
+        >
+          <img
+            src={`https://www.themoviedb.org/t/p/w200/${eachMovie.poster_path}`}
+            alt={eachMovie.title}
+            className="movie-image"
+          />
+          <div className="movie-title-container">
+            <p className="movie-title">{eachMovie.title}</p>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 }
