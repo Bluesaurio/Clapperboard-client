@@ -8,9 +8,9 @@ function Reviews() {
   const redirect = useNavigate();
   const [allUserReviews, setAllUserReviews] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isThisEditable, setIsThisEditable] = useState(null);
+  const [idToEdit, setIdToEdit] = useState(null);
   const [rating, setRating] = useState(null);
-  const [reviewText, setReviewText] = useState(null);
+  const [text, setText] = useState(null);
 
   useEffect(() => {
     getData();
@@ -29,7 +29,7 @@ function Reviews() {
   };
 
   const handleReviewText = (e) => {
-    setReviewText(e.target.value);
+    setText(e.target.value);
   };
 
   const handleRating = (rate) => {
@@ -37,13 +37,44 @@ function Reviews() {
     setRating(rate);
   };
 
-  const handleSubmit = (reviewId) => {};
+  const handleSubmit = async (e, reviewId) => {
+    e.preventDefault();
+
+    const updatedReview = {
+      rating,
+      text,
+    };
+
+    console.log("Este es el updated", updatedReview);
+
+    try {
+      await service.put(`/review/${reviewId}`, updatedReview);
+      getData();
+      setRating(null);
+      setText(null);
+      setIdToEdit(null);
+    } catch (error) {
+      console.log(error);
+      redirect("/error");
+    }
+  };
+
+  const handleDelete = async (index, reviewId) => {
+    console.log(index);
+    try {
+      await service.delete(`/review/${reviewId}`);
+      getData();
+    } catch (error) {
+      console.log(error);
+      redirect("/error");
+    }
+  };
 
   const handleChangeIsEditable = (reviewId) => {
     // para limpiar los campos de estados de reseñàs a editar al cambier de edit o cerrar edit
     setRating(null);
-    setReviewText(null);
-    setIsThisEditable(reviewId);
+    setText(null);
+    setIdToEdit(reviewId);
   };
 
   if (isLoading) {
@@ -53,16 +84,16 @@ function Reviews() {
   return (
     <div>
       {allUserReviews.map((eachReview, index) => {
-        console.log(eachReview.rating);
+        console.log(eachReview);
         return (
           <div key={eachReview._id}>
-            {isThisEditable == eachReview._id ? (
+            {idToEdit == eachReview._id ? (
               <div>
                 <Rating
                   onClick={handleRating}
                   initialValue={eachReview.rating}
                 />
-                <form onSubmit={() => handleSubmit(eachReview._id)}>
+                <form onSubmit={(e) => handleSubmit(e, eachReview._id)}>
                   <textarea
                     name={eachReview.text}
                     cols="30"
@@ -70,14 +101,12 @@ function Reviews() {
                     onChange={handleReviewText}
                     defaultValue={eachReview.text}
                   ></textarea>
-                </form>
-                <div>
-                  <button>Submit changes</button>
+                  <button type="submit">Submit changes</button>
                   <br />
                   <button onClick={() => handleChangeIsEditable(null)}>
                     Back
                   </button>
-                </div>
+                </form>
               </div>
             ) : (
               <div>
@@ -85,6 +114,9 @@ function Reviews() {
                 <p>{eachReview.text}</p>
                 <button onClick={() => handleChangeIsEditable(eachReview._id)}>
                   Editar
+                </button>
+                <button onClick={() => handleDelete(index, eachReview._id)}>
+                  Delete
                 </button>
               </div>
             )}
