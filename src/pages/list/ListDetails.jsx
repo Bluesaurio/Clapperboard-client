@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../../services/config";
 import { Link } from "react-router-dom";
+import Search from "../../components/Search";
+import AddMovieList from "../../components/AddMovieList";
 
 function ListDetails() {
   const params = useParams();
@@ -120,6 +122,7 @@ function ListDetails() {
           </Link>
         </div>
       )}
+      <AddMovieList />
     </div>
   );
 }

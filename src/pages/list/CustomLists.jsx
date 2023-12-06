@@ -45,7 +45,7 @@ function CustomList() {
           </div>
         );
       })}
-      <AddList />
+      <AddList getData={getData} />
     </div>
   );
 }

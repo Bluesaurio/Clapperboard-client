@@ -33,17 +33,6 @@ function Search() {
         Search
       </Button>
     </Form>
-
-    // <div>
-    //   <label htmlFor="query">Buscar: </label>
-    //   <input
-    //     type="text"
-    //     name="query"
-    //     onChange={handleQueryChange}
-    //     value={queryValue}
-    //   />
-    //   <button onClick={handleSearch}>Search</button>
-    // </div>
   );
 }
 

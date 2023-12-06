@@ -2,7 +2,7 @@ import { useState } from "react";
 import service from "../services/config";
 import { useNavigate, useParams } from "react-router-dom";
 
-function AddList() {
+function AddList(props) {
   const params = useParams();
   console.log(params.userId);
   const redirect = useNavigate();
@@ -30,6 +30,7 @@ function AddList() {
         `/profile/${params.userId}/lists`,
         customList
       );
+      props.getData();
       console.log(response);
     } catch (error) {
       console.log(error);
