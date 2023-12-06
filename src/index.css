@@ -28,9 +28,10 @@ body {
 .movie-item {
   text-align: center;
   margin: 10px;
-  width: 180px;
   text-decoration: none;
-  color: inherit;
+  color: white;
+  width: calc(33.33% - 20px);
+  max-width: 180px;
 }
 
 .movie-image {
