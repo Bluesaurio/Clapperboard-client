@@ -9,6 +9,7 @@ function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState([null]);
   const [isLoading, setIsLoading] = useState(true);
   const [allReviews, setAllReviews] = useState(null);
+  const [doIHaveAReview, setDoIHaveAReview] = useState(false);
 
   useEffect(() => {
     getData();
@@ -18,6 +19,7 @@ function MovieDetails() {
     try {
       const response = await service.get(`/movie/${params.movieId}/details`);
       const getReviews = await service.get(`/review/${params.movieId}`);
+
       console.log(response.data);
       setMovieDetails(response.data);
       console.log(getReviews.data);

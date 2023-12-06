@@ -49,6 +49,7 @@ function Reviews() {
 
     try {
       await service.put(`/review/${reviewId}`, updatedReview);
+
       getData();
       setRating(null);
       setText(null);
@@ -101,7 +102,9 @@ function Reviews() {
                     onChange={handleReviewText}
                     defaultValue={eachReview.text}
                   ></textarea>
-                  <button type="submit">Submit changes</button>
+                  <button disabled={!text || !rating} type="submit">
+                    Submit changes
+                  </button>
                   <br />
                   <button onClick={() => handleChangeIsEditable(null)}>
                     Back
