@@ -3,6 +3,11 @@ import { AuthContext } from "../../context/auth.context";
 import service from "../../services/config";
 import { Link, useNavigate } from "react-router-dom";
 
+// Bootstrap
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+
 function ProfileEdit() {
   const { loggedUser } = useContext(AuthContext);
 
@@ -73,83 +78,112 @@ function ProfileEdit() {
     return <h3>Buscando data</h3>;
   }
 
+  // Styles
+  const containerStyle = {
+    maxWidth: "600px",
+    backgroundColor: "grey",
+    padding: "20px",
+    borderRadius: "8px",
+  };
+
   return (
     <div>
       <h3>Update your profile: </h3>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First name: </label>
-        <input
-          type="text"
-          name="firstName"
-          onChange={handleInputChange}
-          defaultValue={userData.firstName}
-        />
-        <br />
-        <label htmlFor="lastName">Last name: </label>
-        <input
-          type="text"
-          name="lastName"
-          onChange={handleInputChange}
-          defaultValue={userData.lastName}
-        />
-        <br />
-        <label htmlFor="location">Location: </label>
-        <input
-          type="text"
-          name="location"
-          onChange={handleInputChange}
-          defaultValue={userData.location}
-        />
-        <br />
-        <label htmlFor="bio">Bio: </label>
-        <textarea
-          name="bio"
-          rows="5"
-          cols="33"
-          onChange={handleInputChange}
-          defaultValue={userData.bio}
-        />
-        <br />
-        <label htmlFor="pronouns">Pronouns: </label>
-        <select
-          name="pronouns"
-          onChange={handleInputChange}
-          defaultValue={userData.pronouns}
-        >
-          <option value={""}></option>
-          <option value="he/him">he/him</option>
-          <option value="she/her">she/her</option>
-          <option value="they/them">they/them</option>
-        </select>
-        <br />
-        <br />
-        <img
-          src={imageUrl ? imageUrl : userData.profilePic}
-          alt={userData.username}
-          width={200}
-        />
-        <div>
-          <label>Image: </label>
-          <input
-            type="file"
-            name="image"
-            onChange={handleFileUpload}
-            disabled={isUploading}
-          />
-        </div>
-        {isUploading ? <h3>... uploading image</h3> : null}
-        {/* {imageUrl ? (
-          <div>
-            <img src={imageUrl} alt="img" width={200} />
-          </div>
-        ) : null} */}
-        <br />
+      <Container className="text-center" style={containerStyle}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formFirstName">
+            <Form.Label>First name:</Form.Label>
+            <Form.Control
+              type="text"
+              name="firstName"
+              onChange={handleInputChange}
+              defaultValue={userData.firstName}
+            />
+          </Form.Group>
 
-        <button>Confirm changes</button>
-        <Link to={`/profile/${userData._id}`}>
-          <button>Back</button>
-        </Link>
-      </form>
+          <Form.Group controlId="formLastName">
+            <Form.Label>Last name:</Form.Label>
+            <Form.Control
+              type="text"
+              name="lastName"
+              onChange={handleInputChange}
+              defaultValue={userData.lastName}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formLocation">
+            <Form.Label>Location:</Form.Label>
+            <Form.Control
+              type="text"
+              name="location"
+              onChange={handleInputChange}
+              defaultValue={userData.location}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBio">
+            <Form.Label>Bio:</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows="5"
+              cols="33"
+              name="bio"
+              onChange={handleInputChange}
+              defaultValue={userData.bio}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formPronouns">
+            <Form.Label>Pronouns:</Form.Label>
+            <Form.Control
+              as="select"
+              name="pronouns"
+              onChange={handleInputChange}
+              defaultValue={userData.pronouns}
+            >
+              <option value={""}></option>
+              <option value="he/him">he/him</option>
+              <option value="she/her">she/her</option>
+              <option value="they/them">they/them</option>
+            </Form.Control>
+          </Form.Group>
+
+          <br />
+
+          <img
+            src={imageUrl ? imageUrl : userData.profilePic}
+            alt={userData.username}
+            width={200}
+          />
+
+          <Form.Group controlId="formImage">
+            <Form.Label>Image:</Form.Label>
+            <Form.Control
+              type="file"
+              name="image"
+              onChange={handleFileUpload}
+              disabled={isUploading}
+            />
+          </Form.Group>
+
+          {isUploading ? <h3>... uploading image</h3> : null}
+
+          <br />
+
+          <Button
+            variant="light"
+            type="submit"
+            style={{ backgroundColor: "#fdb14d" }}
+          >
+            Confirm changes
+          </Button>
+          <br />
+          <br />
+          <Link to={`/profile/${userData._id}`}>
+            <Button variant="danger">Back</Button>
+          </Link>
+        </Form>
+      </Container>
     </div>
   );
 }

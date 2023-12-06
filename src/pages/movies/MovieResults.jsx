@@ -28,14 +28,22 @@ function MovieResults() {
   }
 
   return (
-    <div>
+    <div className="movie-list-container">
       {moviesFound.map((eachMovie) => {
         return (
-          <Link key={eachMovie.id} to={`/movie/${eachMovie.id}/details`}>
+          <Link
+            key={eachMovie.id}
+            to={`/movie/${eachMovie.id}/details`}
+            className="movie-item"
+          >
             <img
               src={`https://www.themoviedb.org/t/p/w200/${eachMovie.poster_path}`}
+              alt={eachMovie.title}
+              className="movie-image"
             ></img>
-            <h3>{eachMovie.title}</h3>
+            <div className="movie-title-container">
+              <p className="movie-title">{eachMovie.title}</p>
+            </div>
           </Link>
         );
       })}
