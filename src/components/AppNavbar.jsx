@@ -42,7 +42,9 @@ function AppNavbar() {
                 <NavDropdown.Item href={`/profile/${loggedUser._id}/reviews`}>
                   Reviews
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/">Lists</NavDropdown.Item>
+                <NavDropdown.Item href={`/profile/${loggedUser._id}/lists`}>
+                  Lists
+                </NavDropdown.Item>
                 <NavDropdown.Item href="/">Favorites</NavDropdown.Item>
                 <NavDropdown.Item href="/">Watchlist</NavDropdown.Item>
                 <NavDropdown.Divider />

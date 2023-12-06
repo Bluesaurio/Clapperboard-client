@@ -16,6 +16,7 @@ import Reviews from "./pages/reviews/Reviews";
 
 // components
 import AppNavbar from "./components/AppNavbar";
+import CustomList from "./pages/list/CustomLists";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/movie/:movieId/details" element={<MovieDetails />} />
         <Route path="/movie/:search/results" element={<MovieResults />} />
         <Route path="/profile/:userId/reviews" element={<Reviews />} />
+        <Route path="/profile/:userId/lists" element={<CustomList />} />
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />
