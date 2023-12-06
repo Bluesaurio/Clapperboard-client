@@ -121,4 +121,22 @@ body {
   margin-bottom: 30px;
 }
 
-/* Styles for edit profile  */
+/* Styles for movie details */
+.movie-details-container {
+  margin-top: 40px;
+}
+
+.movie-details-container h3 {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+.movie-details-container h4 {
+  margin-top: 20px;
+}
+.review-box {
+  background-color: grey;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 30px;
+  border: 2px solid #fdb14d;
+}

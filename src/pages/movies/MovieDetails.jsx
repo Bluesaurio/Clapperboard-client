@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import AddReview from "../../components/AddReview";
 import { AuthContext } from "../../context/auth.context";
 
+import { Row, Col } from "react-bootstrap";
+
 function MovieDetails() {
   const params = useParams();
   const [movieDetails, setMovieDetails] = useState([null]);
@@ -44,35 +46,50 @@ function MovieDetails() {
   }
 
   return (
-    <div>
-      <h1>{movieDetails.title}</h1>
-      <img
-        src={`https://www.themoviedb.org/t/p/w200/${movieDetails.poster_path}`}
-      ></img>
-      <h3>Plot</h3>
-      <p>{movieDetails.overview}</p>
-      <h3>Genres</h3>
-      <ul>
-        {movieDetails.genres.map((eachGenre) => {
-          return <li key={eachGenre.id}>{eachGenre.name}</li>;
-        })}
-      </ul>
-      <p>Release date: {movieDetails.release_date}</p>
+    <div className="movie-details-container">
+      <Row>
+        <Col xs={12} md={4}>
+          <img
+            src={`https://www.themoviedb.org/t/p/w300/${movieDetails.poster_path}`}
+            alt={movieDetails.title}
+            className="img-fluid"
+          />
+        </Col>
 
-      {allReviews.map((eachReview) => {
-        return (
-          <div key={eachReview._id}>
-            {eachReview.rating === 5 && <p>⭐⭐⭐⭐⭐</p>}
-            {eachReview.rating === 4 && <p>⭐⭐⭐⭐</p>}
-            {eachReview.rating === 3 && <p>⭐⭐⭐</p>}
-            {eachReview.rating === 2 && <p>⭐⭐</p>}
-            {eachReview.rating === 1 && <p>⭐</p>}
-            <p>{eachReview.text} </p>
-            <p>Review by: {eachReview.creatorId.username}</p>
-          </div>
-        );
-      })}
-      {doIHaveAReview === false && <AddReview getData={getData} />}
+        <Col xs={12} md={4}>
+          <h3>{movieDetails.title}</h3>
+
+          {allReviews.map((eachReview) => (
+            <div key={eachReview._id} className="review-box">
+              {eachReview.rating === 5 && <p>⭐⭐⭐⭐⭐</p>}
+              {eachReview.rating === 4 && <p>⭐⭐⭐⭐</p>}
+              {eachReview.rating === 3 && <p>⭐⭐⭐</p>}
+              {eachReview.rating === 2 && <p>⭐⭐</p>}
+              {eachReview.rating === 1 && <p>⭐</p>}
+
+              <p>{eachReview.text} </p>
+              <p>Review by: {eachReview.creatorId.username}</p>
+            </div>
+          ))}
+
+          {doIHaveAReview === false && <AddReview getData={getData} />}
+        </Col>
+
+        <Col xs={12} md={4}>
+          <h4>Plot</h4>
+          <p>{movieDetails.overview}</p>
+
+          <h4>Genres</h4>
+          <ul className="list-unstyled">
+            {movieDetails.genres.map((eachGenre) => (
+              <li key={eachGenre.id}>{eachGenre.name}</li>
+            ))}
+          </ul>
+
+          <h4>Release Date</h4>
+          <p>{movieDetails.release_date}</p>
+        </Col>
+      </Row>
     </div>
   );
 }

@@ -3,6 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import service from "../services/config";
 import { Rating } from "react-simple-star-rating";
 
+//Bootstrap
+import { Row, Col, Button } from "react-bootstrap";
+
 function AddReview(props) {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
@@ -37,12 +40,27 @@ function AddReview(props) {
 
   return (
     <div>
-      <h4>Add a review</h4>
       <form onSubmit={handleSubmit}>
-        <Rating onClick={handleRating} />
-
-        <textarea onChange={handleReviewText} value={reviewText} />
-        <button>Publish Review</button>
+        <Row className="mb-3">
+          <Col xs={12} style={{ marginBottom: "15px" }}>
+            <h4>Add a review</h4>
+          </Col>
+          <Col xs={12} style={{ marginBottom: "15px" }}>
+            <Rating onClick={handleRating} />
+          </Col>
+          <Col xs={12} style={{ marginBottom: "15px" }}>
+            <textarea onChange={handleReviewText} value={reviewText} />
+          </Col>
+          <Col xs={12}>
+            <Button
+              variant="light"
+              type="submit"
+              style={{ backgroundColor: "#fdb14d" }}
+            >
+              Publish
+            </Button>
+          </Col>
+        </Row>
       </form>
     </div>
   );
