@@ -17,21 +17,22 @@ function MovieDetails() {
   }, []);
 
   const getData = async () => {
-    console.log(loggedUser);
     try {
-      const response = await service.get(`/movie/${params.movieId}/details`);
+      const movieResponse = await service.get(
+        `/movie/${params.movieId}/details`
+      );
       const getReviews = await service.get(`/review/${params.movieId}`);
       const LookingForMyReviews = await service.get(
         `/review/${params.movieId}/${loggedUser._id}`
       );
-      console.log(LookingForMyReviews);
+      console.log(getReviews);
       if (!LookingForMyReviews.data) {
         setDoIHaveAReview(false);
       } else {
         setDoIHaveAReview(true);
       }
 
-      setMovieDetails(response.data);
+      setMovieDetails(movieResponse.data);
       setAllReviews(getReviews.data);
       setIsLoading(false);
     } catch (error) {
@@ -67,7 +68,7 @@ function MovieDetails() {
             {eachReview.rating === 2 && <p>⭐⭐</p>}
             {eachReview.rating === 1 && <p>⭐</p>}
             <p>{eachReview.text} </p>
-            <p>Review by: {eachReview.creator}</p>
+            <p>Review by: {eachReview.creatorId.username}</p>
           </div>
         );
       })}
