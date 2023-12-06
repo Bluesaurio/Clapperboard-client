@@ -60,13 +60,16 @@ body {
 .movie-image {
   width: 100%;
   height: auto;
-  border-radius: 5px;
+  border: 2px solid white;
+  border-radius: 8px;
 }
 
 .movie-title-container {
   background-color: #fdb14d;
   padding: 5px;
-  border-radius: 0 0 5px 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid white;
 }
 
 .movie-title {
@@ -125,13 +128,20 @@ body {
 .movie-details-container {
   margin-top: 40px;
 }
-
 .movie-details-container h3 {
   margin-top: 20px;
   margin-bottom: 50px;
+  background-color: gray;
+  padding: 10px;
+  border-radius: 10px;
 }
 .movie-details-container h4 {
   margin-top: 20px;
+}
+
+.movie-details-container img {
+  border: 2px solid white;
+  border-radius: 8px;
 }
 .review-box {
   background-color: grey;
