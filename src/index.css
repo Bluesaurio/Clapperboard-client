@@ -51,3 +51,51 @@ body {
   font-weight: bold;
   font-size: 14px;
 }
+
+/* Styles for profile  */
+.profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-nav {
+  display: flex;
+  margin-top: 100px;
+  align-items: center;
+  justify-content: center;
+  background-color: grey;
+  max-width: 200px;
+  width: 200px;
+  height: 250px;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+.profile-nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.profile-content h4 {
+  margin-bottom: 30px;
+}
+
+.profile-content img {
+  max-width: 80%;
+  height: auto;
+  width: 150px;
+  border-radius: 30%;
+  margin-bottom: 30px;
+}
+
+/* Styles for edit profile  */

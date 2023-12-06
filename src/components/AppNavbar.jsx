@@ -27,7 +27,7 @@ function AppNavbar() {
 
   if (isLoggedIn) {
     return (
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <Navbar expand="lg" className="bg-body-tertiary" sticky="top">
         <Container>
           <Navbar.Brand href="/">Clapperboard</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
