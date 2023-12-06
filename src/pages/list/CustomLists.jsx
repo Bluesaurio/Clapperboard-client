@@ -37,8 +37,10 @@ function CustomList() {
           <div key={eachList._id}>
             <p>Name: {eachList.name}</p>
             <p>Description: {eachList.description}</p>
-            <Link to={`/profile/${params.userId}/lists/details`}>
-              <p>Imaginemos que esto es una imagen</p>
+            <Link
+              to={`/profile/${params.userId}/lists/${eachList._id}/details`}
+            >
+              <p>Imaginemos que esto es la imagen de la lista</p>
             </Link>
           </div>
         );

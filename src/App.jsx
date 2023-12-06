@@ -13,10 +13,11 @@ import ProfileEdit from "./pages/profile/ProfileEdit";
 import MovieDetails from "./pages/movies/MovieDetails";
 import MovieResults from "./pages/movies/MovieResults";
 import Reviews from "./pages/reviews/Reviews";
+import CustomList from "./pages/list/CustomLists";
+import ListDetails from "./pages/list/ListDetails";
 
 // components
 import AppNavbar from "./components/AppNavbar";
-import CustomList from "./pages/list/CustomLists";
 
 function App() {
   return (
@@ -37,6 +38,10 @@ function App() {
         <Route path="/movie/:search/results" element={<MovieResults />} />
         <Route path="/profile/:userId/reviews" element={<Reviews />} />
         <Route path="/profile/:userId/lists" element={<CustomList />} />
+        <Route
+          path="/profile/:userId/lists/:listId/details"
+          element={<ListDetails />}
+        />
 
         <Route path="/error" element={<Error />} />
         <Route path="*" element={<NotFound />} />
