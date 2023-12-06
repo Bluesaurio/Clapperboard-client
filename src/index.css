@@ -13,12 +13,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Styles for nav */
 .bg-body-tertiary {
-  background-color: #242424;
+  background-color: black !important;
+}
+
+.navbar {
+  --bs-navbar-color: white;
+  --bs-navbar-brand-color: white;
+  --bs-navbar-hover-color: #fdb14d;
+  --bs-navbar-brand-hover-color: #fdb14d;
+  --bs-navbar-active-color: #fdb14d;
+  padding: 10px;
+}
+
+.dropdown-menu {
+  --bs-dropdown-color: white;
+  --bs-dropdown-bg: lightgrey;
+  --bs-dropdown-divider-bg: lightgrey;
+  --bs-dropdown-link-color: black;
+  --bs-dropdown-link-hover-color: blue;
+  --bs-dropdown-link-hover-bg: lightgrey;
+  --bs-dropdown-link-active-bg: #fdb14d;
+}
+
+.navbar-toggler {
+  background-color: #fdb14d;
 }
 
 /* Styles for home movies */
-
 .movie-list-container {
   display: flex;
   flex-wrap: wrap;
