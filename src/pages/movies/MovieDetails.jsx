@@ -1,28 +1,37 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import service from "../../services/config";
 import { Link, useParams } from "react-router-dom";
 import AddReview from "../../components/AddReview";
+import { AuthContext } from "../../context/auth.context";
 
 function MovieDetails() {
   const params = useParams();
-
   const [movieDetails, setMovieDetails] = useState([null]);
   const [isLoading, setIsLoading] = useState(true);
   const [allReviews, setAllReviews] = useState(null);
   const [doIHaveAReview, setDoIHaveAReview] = useState(false);
+  const { loggedUser } = useContext(AuthContext);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
+    console.log(loggedUser);
     try {
       const response = await service.get(`/movie/${params.movieId}/details`);
       const getReviews = await service.get(`/review/${params.movieId}`);
+      const LookingForMyReviews = await service.get(
+        `/review/${params.movieId}/${loggedUser._id}`
+      );
+      console.log(LookingForMyReviews);
+      if (!LookingForMyReviews.data) {
+        setDoIHaveAReview(false);
+      } else {
+        setDoIHaveAReview(true);
+      }
 
-      console.log(response.data);
       setMovieDetails(response.data);
-      console.log(getReviews.data);
       setAllReviews(getReviews.data);
       setIsLoading(false);
     } catch (error) {
@@ -62,8 +71,7 @@ function MovieDetails() {
           </div>
         );
       })}
-
-      <AddReview getData={getData} />
+      {doIHaveAReview === false && <AddReview getData={getData} />}
     </div>
   );
 }
