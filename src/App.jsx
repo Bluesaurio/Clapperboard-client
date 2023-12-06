@@ -17,6 +17,8 @@ import CustomList from "./pages/list/CustomLists";
 import ListDetails from "./pages/list/ListDetails";
 
 // components
+import IsAlreadyLoggedIn from "./components/IsAlreadyLoggedIn";
+import IsPrivate from "./components/IsPrivate";
 import AppNavbar from "./components/AppNavbar";
 
 function App() {
@@ -29,11 +31,37 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+
+        <Route
+          path="/register"
+          element={
+            <IsAlreadyLoggedIn>
+              <Register />
+            </IsAlreadyLoggedIn>
+          }
+        />
+
+        <Route
+          path="/login"
+          element={
+            <IsAlreadyLoggedIn>
+              <Login />
+            </IsAlreadyLoggedIn>
+          }
+        />
+
         <Route path="/about" element={<About />} />
         <Route path="/profile/:userId" element={<Profile />} />
-        <Route path="/profile/edit" element={<ProfileEdit />} />
+
+        <Route
+          path="/profile/edit"
+          element={
+            <IsPrivate>
+              <ProfileEdit />
+            </IsPrivate>
+          }
+        />
+
         <Route path="/movie/:movieId/details" element={<MovieDetails />} />
         <Route path="/movie/:search/results" element={<MovieResults />} />
         <Route path="/profile/:userId/reviews" element={<Reviews />} />
