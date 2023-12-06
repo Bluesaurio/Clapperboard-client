@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import service from "../../services/config";
 import { AuthContext } from "../../context/auth.context";
 
+// Bootstrap
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+
 function Register() {
   const { authenticateUser } = useContext(AuthContext);
   const redirect = useNavigate();
@@ -44,45 +49,64 @@ function Register() {
     }
   };
 
+  // Styles
+  const containerStyle = {
+    maxWidth: "600px",
+    backgroundColor: "grey",
+    padding: "20px",
+    borderRadius: "8px",
+  };
+
   return (
     <div>
-      <h1>Formulario de Registro</h1>
+      <h1>Create your account</h1>
+      <br />
 
-      <form onSubmit={handleSignup}>
-        <label>Nombre de Usuario:</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsernameChange}
-        />
+      <Container className="text-center" style={containerStyle}>
+        <Form onSubmit={handleSignup}>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              name="username"
+              value={username}
+              onChange={handleUsernameChange}
+            />
+          </Form.Group>
 
-        <br />
+          <Form.Group controlId="formEmail">
+            <Form.Label>E-mail</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleEmailChange}
+            />
+          </Form.Group>
 
-        <label>Correo Electronico:</label>
-        <input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+          </Form.Group>
 
-        <br />
+          <br />
 
-        <label>Contraseña:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
+          <Button
+            variant="light"
+            type="submit"
+            style={{ backgroundColor: "#fdb14d" }}
+          >
+            Sign up
+          </Button>
 
-        <br />
-
-        <button type="submit">Registrar</button>
-
-        <p style={{ color: "red" }}>{errorMessage}</p>
-      </form>
+          <p style={{ color: "red" }}>{errorMessage}</p>
+        </Form>
+      </Container>
     </div>
   );
 }

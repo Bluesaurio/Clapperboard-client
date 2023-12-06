@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import service from "../../services/config";
 import { AuthContext } from "../../context/auth.context";
 
+// Bootstrap
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+
 function Login() {
   const { authenticateUser } = useContext(AuthContext);
 
@@ -40,35 +45,53 @@ function Login() {
     }
   };
 
+  // Styles
+  const containerStyle = {
+    maxWidth: "600px",
+    backgroundColor: "grey",
+    padding: "20px",
+    borderRadius: "8px",
+  };
+
   return (
     <div>
-      <h1>Formulario de Acceso</h1>
+      <h1>Log in</h1>
+      <br />
+      <Container className="text-center" style={containerStyle}>
+        <Form onSubmit={handleLogin}>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type="text"
+              name="username"
+              value={username}
+              onChange={handleUsernameChange}
+            />
+          </Form.Group>
 
-      <form onSubmit={handleLogin}>
-        <label>Username :</label>
-        <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsernameChange}
-        />
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+          </Form.Group>
 
-        <br />
+          <br />
 
-        <label>Contraseña:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
+          <Button
+            variant="light"
+            type="submit"
+            style={{ backgroundColor: "#fdb14d" }}
+          >
+            Acceder
+          </Button>
 
-        <br />
-
-        <button type="submit">Acceder</button>
-
-        <p style={{ color: "red" }}>{errorMessage}</p>
-      </form>
+          <p style={{ color: "red" }}>{errorMessage}</p>
+        </Form>
+      </Container>
     </div>
   );
 }
