@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../../services/config";
+import { Link } from "react-router-dom";
 
 function ListDetails() {
   const params = useParams();
@@ -38,7 +39,7 @@ function ListDetails() {
     setDescription(e.target.value);
   };
 
-  const handleSubmit = async (e, listId) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const updatedList = {
@@ -56,6 +57,15 @@ function ListDetails() {
       setName(null);
       setDescription(null);
       setIdToEdit(null);
+    } catch (error) {
+      console.log(error);
+      redirect("/error");
+    }
+  };
+  const handleDelete = async () => {
+    try {
+      await service.delete(`/profile/${params.userId}/lists/${params.listId}`);
+      redirect(`/profile/${params.userId}/lists/`);
     } catch (error) {
       console.log(error);
       redirect("/error");
@@ -103,6 +113,11 @@ function ListDetails() {
           <button onClick={() => handleChangeIsEditable(listDetails._id)}>
             Edit
           </button>
+          <br />
+          <button onClick={handleDelete}>Delete</button>
+          <Link to={`/profile/${params.userId}/lists/`}>
+            <button>Back</button>
+          </Link>
         </div>
       )}
     </div>
