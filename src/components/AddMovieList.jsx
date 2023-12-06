@@ -9,18 +9,27 @@ import Dropdown from "react-bootstrap/Dropdown";
 function AddMovieList() {
   const [queryValue, setQueryValue] = useState("");
   const [results, setResults] = useState([]);
+  const [lookingForFilms, setLookingForFilms] = useState([]);
 
-  const handleQueryChange = async (e) => {
-    setQueryValue(e.target.value);
+  useEffect(() => {
+    const delayedSearch = setTimeout(() => {
+      getData();
+    }, 1500);
+    return () => clearTimeout(delayedSearch);
+  }, [lookingForFilms]);
+
+  const getData = async () => {
     try {
-      setTimeout(async () => {
-        const response = await service.get(`/movie/${queryValue}/results`);
-        console.log("Esto es lo que recibo", response.data.results);
-        setResults(response.data.results);
-      }, 5000);
+      const response = await service.get(`/movie/${queryValue}/results`);
+      setResults(response.data.results);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleQueryChange = async (e) => {
+    setQueryValue(e.target.value);
+    setLookingForFilms(e.target.value);
   };
 
   return (
@@ -35,17 +44,18 @@ function AddMovieList() {
           defaultValue={queryValue}
         />
       </Form>
-      {results.map((eachResult) => {
-        return (
-          <div>
-            {eachResult.title}
-            <img
-              src={`https://www.themoviedb.org/t/p/w200/${eachResult.poster_path}`}
-            ></img>
-            <br />
-          </div>
-        );
-      })}
+      {lookingForFilms !== "" &&
+        results.map((eachResult, index) => {
+          return (
+            <div key={index}>
+              {eachResult.title}
+              <img
+                src={`https://www.themoviedb.org/t/p/w200/${eachResult.poster_path}`}
+              ></img>
+              <br />
+            </div>
+          );
+        })}
     </div>
   );
 }
