@@ -96,9 +96,14 @@ function MovieDetails() {
               <p>{eachReview.text} </p>
               <p>
                 Review by:{" "}
-                <Link to={`/profile/${eachReview.creatorId._id}`}>
-                  {eachReview.creatorId.username}
-                </Link>
+                {eachReview.creatorId._id && (
+                  <Link to={`/profile/${eachReview.creatorId._id}`}>
+                    {eachReview.creatorId.username}
+                  </Link>
+                )}
+                {!eachReview.creatorId._id && (
+                  <Link to={`/login`}>{eachReview.creatorId.username}</Link>
+                )}
               </p>
             </div>
           ))}

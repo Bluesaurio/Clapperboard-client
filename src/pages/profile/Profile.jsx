@@ -52,12 +52,6 @@ function Profile() {
           <Nav.Link href={`/profile/${params.userId}/reviews`}>
             Reviews
           </Nav.Link>
-          <Nav.Link href={`/profile/${loggedUser._id}/favorites`}>
-            Favorites
-          </Nav.Link>
-          <Nav.Link href={`/profile/${loggedUser._id}/watchlist`}>
-            Watchlist
-          </Nav.Link>
           <Nav.Link href={`/profile/${params.userId}/lists`}>Lists</Nav.Link>
         </Nav>
       </div>
@@ -87,8 +81,8 @@ function Profile() {
           </p>
         )}
         <br />
-        <Link to={"/profile/edit"}>
-          {loggedUser._id === params.userId && (
+        {loggedUser && loggedUser._id === params.userId && (
+          <Link to={"/profile/edit"}>
             <Button
               variant="light"
               type="submit"
@@ -96,8 +90,8 @@ function Profile() {
             >
               Edit profile
             </Button>
-          )}
-        </Link>
+          </Link>
+        )}
       </div>
     </div>
   );

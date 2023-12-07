@@ -51,7 +51,14 @@ function App() {
         />
 
         <Route path="/about" element={<About />} />
-        <Route path="/profile/:userId" element={<Profile />} />
+        <Route
+          path="/profile/:userId"
+          element={
+            <IsAlreadyLoggedIn>
+              <Profile />
+            </IsAlreadyLoggedIn>
+          }
+        />
 
         <Route
           path="/profile/edit"
