@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import service from "../../services/config";
 import { Link, useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import ImageApi from "../../components/ImageApi";
 
 function MovieResults() {
   const params = useParams();
@@ -47,11 +48,11 @@ function MovieResults() {
             to={`/movie/${eachMovie.id}/details`}
             className="movie-item"
           >
-            <img
-              src={`https://www.themoviedb.org/t/p/w200/${eachMovie.poster_path}`}
+            <ImageApi
+              path={eachMovie.poster_path}
               alt={eachMovie.title}
               className="movie-image"
-            ></img>
+            />
             <div className="movie-title-container">
               <p className="movie-title">{eachMovie.title}</p>
             </div>

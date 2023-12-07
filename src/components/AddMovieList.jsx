@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 // Bootstrap
 import Form from "react-bootstrap/Form";
+import ImageApi from "./ImageApi";
 
 function AddMovieList(props) {
   const redirect = useNavigate();
@@ -64,9 +65,11 @@ function AddMovieList(props) {
             <div key={index}>
               {eachResult.title}
               <div>
-                <img
-                  src={`https://www.themoviedb.org/t/p/w200/${eachResult.poster_path}`}
-                ></img>
+                <ImageApi
+                  path={eachResult.poster_path}
+                  alt={eachResult.title}
+                  className="movie-image"
+                />
                 <button onClick={(e) => handleAddMovie(index, eachResult.id)}>
                   Add to the list
                 </button>

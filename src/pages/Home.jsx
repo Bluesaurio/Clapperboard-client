@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import service from "../services/config";
 import { Link } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
+import ImageApi from "../components/ImageApi";
 
 function Home() {
   const [popularMovies, setPopularMovies] = useState(null);
@@ -44,8 +45,8 @@ function Home() {
           key={eachMovie.id}
           className="movie-item"
         >
-          <img
-            src={`https://www.themoviedb.org/t/p/w200/${eachMovie.poster_path}`}
+          <ImageApi
+            path={eachMovie.poster_path}
             alt={eachMovie.title}
             className="movie-image"
           />

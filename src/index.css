@@ -24,7 +24,7 @@ body {
   --bs-navbar-hover-color: #fdb14d;
   --bs-navbar-brand-hover-color: #fdb14d;
   --bs-navbar-active-color: #fdb14d;
-  padding: 10px;
+  --bs-navbar-padding-y: 0.2rem;
 }
 
 .dropdown-menu {
@@ -41,6 +41,15 @@ body {
   background-color: #fdb14d;
 }
 
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+  width: auto;
+}
 /* Styles for home movies */
 .movie-list-container {
   display: flex;
