@@ -23,7 +23,7 @@ function Search() {
   };
 
   return (
-    <Form className="d-flex" onSubmit={(e) => handleSearch}>
+    <Form className="d-flex" onSubmit={(e) => handleSearch(e)}>
       <Form.Control
         type="search"
         placeholder="Search"
@@ -32,7 +32,9 @@ function Search() {
         onChange={handleQueryChange}
         value={queryValue}
       />
-      <Button variant="outline-success">Search</Button>
+      <Button variant="outline-success" type="submit">
+        Search
+      </Button>
     </Form>
   );
 }
