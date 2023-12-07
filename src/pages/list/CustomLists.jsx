@@ -85,7 +85,9 @@ function CustomList() {
                     className="review-image"
                   />
                 )}
-                {!eachList.filmDetails && <p>Click here to add a movie!</p>}
+                {loggedUser?._id === params.userId && !eachList.filmDetails && (
+                  <p>Click here to add a movie!</p>
+                )}
               </div>
             </Link>
           </div>
