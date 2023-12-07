@@ -204,14 +204,9 @@ body {
   width: 20%;
   margin: 0 auto;
   height: auto;
-
+  border: 2px solid white;
+  border-radius: 8px;
   margin-bottom: 50px;
   display: grid;
   gap: 0px;
-}
-
-.add-movie-text {
-  text-align: center;
-  margin: auto;
-  width: 50%;
 }

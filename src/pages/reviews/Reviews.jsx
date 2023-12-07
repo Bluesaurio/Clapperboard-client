@@ -189,6 +189,7 @@ function Reviews() {
                 >
                   Delete
                 </Button>
+                <hr />
               </div>
             )}
           </div>
