@@ -48,6 +48,13 @@ function AddMovieList(props) {
     }
   };
 
+  console.log(
+    "DETALLES DE LA LISTA",
+    props.listDetails,
+    "DETALLES DE LA BUSQUEDA",
+    results
+  );
+
   return (
     <div>
       {props.listDetails.filmDetails &&
@@ -83,9 +90,19 @@ function AddMovieList(props) {
                   alt={eachResult.title}
                   className="review-image"
                 />
-                <button onClick={() => handleAddMovie(eachResult.id)}>
-                  Add to the list
-                </button>
+                {props.listDetails.filmDetails.map((eachMovie, index) => {
+                  if (eachMovie.apiId[index] === eachResult.id) {
+                    return <p key={eachMovie.apiId}>Movie added!</p>;
+                  } else {
+                    return (
+                      <div key={eachMovie.apiId}>
+                        <button onClick={() => handleAddMovie(eachResult.id)}>
+                          Add to the list
+                        </button>
+                      </div>
+                    );
+                  }
+                })}
               </div>
               <br />
             </div>
