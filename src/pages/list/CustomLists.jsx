@@ -55,6 +55,7 @@ function CustomList() {
           <div key={eachList._id}>
             <p>Name: {eachList.name}</p>
             <p>Description: {eachList.description}</p>
+            {!eachList.filmDetails && <p>This list has no movies yet</p>}
             <Link
               to={`/profile/${params.userId}/lists/${eachList._id}/details`}
             >

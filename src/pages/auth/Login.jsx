@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import service from "../../services/config";
 import { AuthContext } from "../../context/auth.context";
 
@@ -86,9 +86,14 @@ function Login() {
             type="submit"
             style={{ backgroundColor: "#fdb14d" }}
           >
-            Acceder
+            Enter
           </Button>
-
+          <br />
+          <br />
+          <p>
+            Are you still not registered yet?{" "}
+            <Link to={"/register"}>click here!</Link>{" "}
+          </p>
           <p style={{ color: "red" }}>{errorMessage}</p>
         </Form>
       </Container>
