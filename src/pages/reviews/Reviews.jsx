@@ -68,8 +68,8 @@ function Reviews() {
     }
   };
 
-  const handleDelete = async (index, reviewId) => {
-    console.log(index);
+  const handleDelete = async (reviewId) => {
+    console.log(reviewId);
     try {
       await service.delete(`/review/${reviewId}`);
       getData();
