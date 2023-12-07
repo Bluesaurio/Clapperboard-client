@@ -61,6 +61,7 @@ function AddReview(props) {
               variant="light"
               type="submit"
               style={{ backgroundColor: "#fdb14d" }}
+              disabled={!reviewText || !rating}
             >
               Publish
             </Button>
