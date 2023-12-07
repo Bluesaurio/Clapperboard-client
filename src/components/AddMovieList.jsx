@@ -100,44 +100,59 @@ function AddMovieList(props) {
             );
           })}
       </div>
-      {loggedUser && params.userId === loggedUser._id && (
-        <Form className="d-flex">
-          <Form.Control
-            type="search"
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-            onChange={handleQueryChange}
-            defaultValue={queryValue}
-          />
-        </Form>
-      )}
-
-      {lookingForFilms !== "" &&
-        results.map((eachResult, index) => {
-          return (
-            <div key={index}>
-              {eachResult.title}
-              <div>
-                <ImageApi
-                  path={eachResult.poster_path}
-                  alt={eachResult.title}
-                  className="review-image"
-                />
-                {props.filmsId && props.filmsId.includes(eachResult.id) ? (
-                  <p key={eachResult.id}>Movie added!</p>
-                ) : (
-                  <div key={eachResult.id}>
-                    <button onClick={() => handleAddMovie(eachResult.id)}>
-                      Add to the list
-                    </button>
-                  </div>
-                )}
+      <div>
+        {loggedUser && params.userId === loggedUser._id && (
+          <Form className="d-flex">
+            <Form.Control
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+              onChange={handleQueryChange}
+              defaultValue={queryValue}
+            />
+          </Form>
+        )}
+      </div>
+      <div className="movie-results-container">
+        {lookingForFilms !== "" &&
+          results.map((eachResult, index) => {
+            return (
+              <div key={index} className="movie-results-item">
+                <h5> {eachResult.title}</h5>
+                <div className="movie-results-details">
+                  <ImageApi
+                    path={eachResult.poster_path}
+                    alt={eachResult.title}
+                    className="movie-results-image"
+                  />
+                  {props.filmsId && props.filmsId.includes(eachResult.id) ? (
+                    <p key={eachResult.id} className="movie-results-message">
+                      Movie added!
+                    </p>
+                  ) : (
+                    <div
+                      key={eachResult.id}
+                      className="movie-results-button-container"
+                    >
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        onClick={() => handleAddMovie(eachResult.id)}
+                      >
+                        Add to the list
+                      </Button>
+                      {/* <button onClick={() => handleAddMovie(eachResult.id)}>
+                        Add to the list
+                      </button> */}
+                    </div>
+                  )}
+                </div>
+                <br />
               </div>
-              <br />
-            </div>
-          );
-        })}
+            );
+          })}
+      </div>
     </div>
   );
 }

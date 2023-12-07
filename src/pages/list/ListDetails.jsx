@@ -6,6 +6,7 @@ import Search from "../../components/Search";
 import AddMovieList from "../../components/AddMovieList";
 import { BeatLoader } from "react-spinners";
 import { AuthContext } from "../../context/auth.context";
+import { Button } from "react-bootstrap";
 
 function ListDetails() {
   const params = useParams();
@@ -109,25 +110,52 @@ function ListDetails() {
   return (
     <div>
       {idToEdit === listDetails._id ? (
-        <div>
+        <div className="form-container">
           <form onSubmit={(e) => handleSubmit(e, listDetails._id)}>
-            <input
-              type="text"
-              defaultValue={listDetails.name}
-              onChange={handleNameChange}
-            />
-            <textarea
-              name={listDetails.description}
-              cols="30"
-              rows="10"
-              defaultValue={listDetails.description}
-              onChange={handleDescriptionChange}
-            />
-            <button disabled={!name || !description} type="submit">
-              Save
-            </button>
-            <br />
-            <button onClick={() => handleChangeIsEditable(null)}>Back</button>
+            <div className="form-input-container">
+              <input
+                type="text"
+                defaultValue={listDetails.name}
+                onChange={handleNameChange}
+              />
+            </div>
+            <div className="form-input-container">
+              <textarea
+                name={listDetails.description}
+                cols="30"
+                rows="10"
+                defaultValue={listDetails.description}
+                onChange={handleDescriptionChange}
+              />
+            </div>
+            <div className="form-button-container">
+              <Button
+                disabled={!name || !description}
+                type="submit"
+                variant="success"
+                style={{
+                  padding: "5px 20px",
+                  marginBottom: "5px",
+                  marginLeft: "10px",
+                }}
+              >
+                Save
+              </Button>
+
+              <br />
+              <Button
+                variant="light"
+                type="submit"
+                onClick={() => handleChangeIsEditable(null)}
+                style={{
+                  padding: "5px 20px",
+                  marginBottom: "5px",
+                  marginLeft: "10px",
+                }}
+              >
+                Back
+              </Button>
+            </div>
           </form>
         </div>
       ) : (
@@ -136,16 +164,46 @@ function ListDetails() {
           <p>{listDetails.description}</p>
 
           {loggedUser && params.userId === loggedUser._id && (
-            <button onClick={() => handleChangeIsEditable(listDetails._id)}>
+            <Button
+              variant="light"
+              type="submit"
+              style={{
+                backgroundColor: "#fdb14d",
+                padding: "5px 20px",
+                marginBottom: "5px",
+              }}
+              onClick={() => handleChangeIsEditable(listDetails._id)}
+            >
               Edit
-            </button>
+            </Button>
           )}
           <br />
           {loggedUser && params.userId === loggedUser._id && (
-            <button onClick={handleDelete}>Delete</button>
+            <Button
+              variant="danger"
+              type="submit"
+              style={{
+                padding: "5px 20px",
+                marginBottom: "5px",
+                marginRight: "10px",
+              }}
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
           )}
           <Link to={`/profile/${params.userId}/lists/`}>
-            <button>Back</button>
+            <Button
+              variant="light"
+              type="submit"
+              style={{
+                padding: "5px 20px",
+                marginBottom: "5px",
+                marginLeft: "10px",
+              }}
+            >
+              Back
+            </Button>
           </Link>
         </div>
       )}
