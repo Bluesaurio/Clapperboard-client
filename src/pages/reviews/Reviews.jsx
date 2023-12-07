@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../../services/config";
 import { Rating } from "react-simple-star-rating";
+import { BeatLoader } from "react-spinners";
 
 function Reviews() {
   const params = useParams();
@@ -79,9 +80,19 @@ function Reviews() {
   };
 
   if (isLoading) {
-    return <h3>Searching</h3>;
+    return (
+      <div
+        style={{
+          paddingTop: "100px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BeatLoader color="orange" size={25} />
+      </div>
+    );
   }
-  // Así queda el return
+
   return (
     <div>
       {allUserReviews.map((eachReview, index) => {

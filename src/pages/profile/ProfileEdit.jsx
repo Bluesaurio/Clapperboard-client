@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth.context";
 import service from "../../services/config";
 import { Link, useNavigate } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
 // Bootstrap
 import Button from "react-bootstrap/Button";
@@ -74,10 +75,20 @@ function ProfileEdit() {
       redirect("/error");
     }
   };
-  if (isLoading) {
-    return <h3>Buscando data</h3>;
-  }
 
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          paddingTop: "100px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BeatLoader color="orange" size={25} />
+      </div>
+    );
+  }
   // Styles
   const containerStyle = {
     maxWidth: "600px",

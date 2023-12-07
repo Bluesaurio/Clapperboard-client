@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
+import service from "../services/config";
+import { Link, useNavigate } from "react-router-dom";
 
 // Bootstrap
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import service from "../services/config";
-import Dropdown from "react-bootstrap/Dropdown";
 
-function AddMovieList() {
+function AddMovieList(props) {
+  const redirect = useNavigate();
   const [queryValue, setQueryValue] = useState("");
   const [results, setResults] = useState([]);
   const [lookingForFilms, setLookingForFilms] = useState([]);
@@ -21,15 +21,29 @@ function AddMovieList() {
   const getData = async () => {
     try {
       const response = await service.get(`/movie/${queryValue}/results`);
+      console.log(response.data);
       setResults(response.data.results);
     } catch (error) {
       console.log(error);
     }
   };
 
+  console.log(results);
+
   const handleQueryChange = async (e) => {
     setQueryValue(e.target.value);
     setLookingForFilms(e.target.value);
+  };
+
+  const handleAddMovie = async (e) => {
+    try {
+      await service.patch(
+        `/profile/lists/${props.listDetails._id}/${eachResult.id}`
+      );
+    } catch (error) {
+      console.log(error);
+      redirect("/error");
+    }
   };
 
   return (
@@ -49,9 +63,11 @@ function AddMovieList() {
           return (
             <div key={index}>
               {eachResult.title}
-              <img
-                src={`https://www.themoviedb.org/t/p/w200/${eachResult.poster_path}`}
-              ></img>
+              <Link onClick={(e) => handleAddMovie(index, eachResult.id)}>
+                <img
+                  src={`https://www.themoviedb.org/t/p/w200/${eachResult.poster_path}`}
+                ></img>
+              </Link>
               <br />
             </div>
           );

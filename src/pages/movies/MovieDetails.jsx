@@ -3,7 +3,9 @@ import service from "../../services/config";
 import { Link, useParams } from "react-router-dom";
 import AddReview from "../../components/AddReview";
 import { AuthContext } from "../../context/auth.context";
+import { BeatLoader } from "react-spinners";
 
+//Bootstrap
 import { Row, Col } from "react-bootstrap";
 
 function MovieDetails() {
@@ -42,8 +44,19 @@ function MovieDetails() {
       console.log(error);
     }
   };
+
   if (isLoading) {
-    return <h3>Buscando data</h3>;
+    return (
+      <div
+        style={{
+          paddingTop: "100px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BeatLoader color="orange" size={25} />
+      </div>
+    );
   }
 
   return (

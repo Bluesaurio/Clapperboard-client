@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import service from "../services/config";
+import { BeatLoader } from "react-spinners";
 
 const AuthContext = createContext();
 
@@ -29,7 +30,17 @@ function AuthWrapper(props) {
   const passedContext = { authenticateUser, isLoggedIn, loggedUser };
 
   if (isLoading) {
-    return <h3>Validando credenciales...</h3>;
+    return (
+      <div
+        style={{
+          paddingTop: "100px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BeatLoader color="orange" size={25} />
+      </div>
+    );
   }
 
   return (

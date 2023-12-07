@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth.context";
 import { Link, NavLink } from "react-router-dom";
 import service from "../../services/config";
+import { BeatLoader } from "react-spinners";
 
 // Bootstrap
 import { Nav } from "react-bootstrap";
@@ -29,7 +30,17 @@ function Profile() {
   };
 
   if (isLoading) {
-    return <h3>Buscando data</h3>;
+    return (
+      <div
+        style={{
+          paddingTop: "100px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BeatLoader color="orange" size={25} />
+      </div>
+    );
   }
 
   return (

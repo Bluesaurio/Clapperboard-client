@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import service from "../services/config";
 import { Link } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
 function Home() {
   const [popularMovies, setPopularMovies] = useState(null);
@@ -22,7 +23,17 @@ function Home() {
   };
 
   if (isLoading) {
-    return <h3>Buscando data</h3>;
+    return (
+      <div
+        style={{
+          paddingTop: "100px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BeatLoader color="orange" size={25} />
+      </div>
+    );
   }
 
   return (

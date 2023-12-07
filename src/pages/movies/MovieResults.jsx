@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import service from "../../services/config";
 import { Link, useParams } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 
 function MovieResults() {
   const params = useParams();
@@ -24,7 +25,17 @@ function MovieResults() {
   };
 
   if (isLoading) {
-    return <h3>Searching</h3>;
+    return (
+      <div
+        style={{
+          paddingTop: "100px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BeatLoader color="orange" size={25} />
+      </div>
+    );
   }
 
   return (

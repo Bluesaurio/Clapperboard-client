@@ -4,6 +4,7 @@ import service from "../../services/config";
 import { Link } from "react-router-dom";
 import Search from "../../components/Search";
 import AddMovieList from "../../components/AddMovieList";
+import { BeatLoader } from "react-spinners";
 
 function ListDetails() {
   const params = useParams();
@@ -81,7 +82,17 @@ function ListDetails() {
   };
 
   if (isLoading) {
-    return <h3>Searching</h3>;
+    return (
+      <div
+        style={{
+          paddingTop: "100px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BeatLoader color="orange" size={25} />
+      </div>
+    );
   }
 
   return (
@@ -122,7 +133,7 @@ function ListDetails() {
           </Link>
         </div>
       )}
-      <AddMovieList />
+      <AddMovieList getData={getData} listDetails={listDetails} />
     </div>
   );
 }

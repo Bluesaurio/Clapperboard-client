@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import AddList from "../../components/AddList";
 import { useEffect, useState } from "react";
 import service from "../../services/config";
+import { BeatLoader } from "react-spinners";
 
 function CustomList() {
   const params = useParams();
@@ -27,7 +28,17 @@ function CustomList() {
   };
 
   if (isLoading) {
-    return <h3>Searching</h3>;
+    return (
+      <div
+        style={{
+          paddingTop: "100px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <BeatLoader color="orange" size={25} />
+      </div>
+    );
   }
 
   return (
