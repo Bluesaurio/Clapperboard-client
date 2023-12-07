@@ -50,6 +50,18 @@ function AddMovieList(props) {
 
   return (
     <div>
+      {props.listDetails.filmDetails &&
+        props.listDetails.filmDetails.map((eachMovie) => {
+          return (
+            <div key={eachMovie.apiId}>
+              <ImageApi
+                path={eachMovie.image}
+                alt={eachMovie.title}
+                className="review-image"
+              />
+            </div>
+          );
+        })}
       <Form className="d-flex">
         <Form.Control
           type="search"
