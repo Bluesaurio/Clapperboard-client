@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import service from "../services/config";
 import { Link, useNavigate } from "react-router-dom";
+import ImageApi from "./ImageApi";
 
 // Bootstrap
 import Form from "react-bootstrap/Form";
-import ImageApi from "./ImageApi";
 
 function AddMovieList(props) {
   const redirect = useNavigate();
@@ -14,12 +14,12 @@ function AddMovieList(props) {
 
   useEffect(() => {
     const delayedSearch = setTimeout(() => {
-      getData();
+      getApiResults();
     }, 1500);
     return () => clearTimeout(delayedSearch);
   }, [lookingForFilms]);
 
-  const getData = async () => {
+  const getApiResults = async () => {
     try {
       const response = await service.get(`/movie/${queryValue}/results`);
       console.log(response.data);
@@ -36,11 +36,12 @@ function AddMovieList(props) {
     setLookingForFilms(e.target.value);
   };
 
-  const handleAddMovie = async (e) => {
+  const handleAddMovie = async (resultId) => {
     try {
       await service.patch(
-        `/profile/lists/${props.listDetails._id}/${eachResult.id}`
+        `/profile/lists/${props.listDetails._id}/${resultId}`
       );
+      props.getData();
     } catch (error) {
       console.log(error);
       redirect("/error");
@@ -70,7 +71,7 @@ function AddMovieList(props) {
                   alt={eachResult.title}
                   className="review-image"
                 />
-                <button onClick={(e) => handleAddMovie(index, eachResult.id)}>
+                <button onClick={() => handleAddMovie(eachResult.id)}>
                   Add to the list
                 </button>
               </div>

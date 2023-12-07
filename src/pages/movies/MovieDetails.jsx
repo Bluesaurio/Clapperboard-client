@@ -73,6 +73,13 @@ function MovieDetails() {
 
         <Col xs={12} md={4}>
           <h3>{movieDetails.title}</h3>
+          {isLoggedIn && !doIHaveAReview && <AddReview getData={getData} />}
+          {!isLoggedIn && (
+            <p>
+              Log in to add your review <Link to={"/login"}>here!</Link>
+            </p>
+          )}
+          {doIHaveAReview && <p>You have already done your Review here!</p>}
 
           {allReviews.map((eachReview) => (
             <div key={eachReview._id} className="review-box">
@@ -90,14 +97,6 @@ function MovieDetails() {
               <p>Review by: {eachReview.creatorId.username}</p>
             </div>
           ))}
-
-          {isLoggedIn && !doIHaveAReview && <AddReview getData={getData} />}
-          {!isLoggedIn && (
-            <p>
-              Log in to add your review <Link to={"/login"}>here!</Link>
-            </p>
-          )}
-          {doIHaveAReview && <p>You have already done your Review here!</p>}
         </Col>
 
         <Col xs={12} md={4}>

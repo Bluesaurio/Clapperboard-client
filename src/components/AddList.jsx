@@ -26,10 +26,7 @@ function AddList(props) {
     console.log(customList);
 
     try {
-      const response = await service.post(
-        `/profile/${params.userId}/lists`,
-        customList
-      );
+      const response = await service.post(`/profile/lists`, customList);
       props.getData();
       console.log(response);
     } catch (error) {

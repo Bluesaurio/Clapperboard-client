@@ -125,7 +125,11 @@ function Reviews() {
               </div>
             ) : (
               <div>
-                <p>{eachReview.rating}</p>
+                {eachReview.rating === 5 && <p>⭐⭐⭐⭐⭐</p>}
+                {eachReview.rating === 4 && <p>⭐⭐⭐⭐</p>}
+                {eachReview.rating === 3 && <p>⭐⭐⭐</p>}
+                {eachReview.rating === 2 && <p>⭐⭐</p>}
+                {eachReview.rating === 1 && <p>⭐</p>}
                 <p>{eachReview.text}</p>
                 <ImageApi
                   path={eachReview.picture}
