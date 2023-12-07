@@ -90,14 +90,12 @@ function CustomList() {
                     />
                   )}
                 </div>
-                <div>
-                  {loggedUser?._id === params.userId &&
-                    !eachList.filmDetails && (
-                      <p className="add-movie-text">
-                        Click here to add a movie!
-                      </p>
-                    )}
-                </div>
+
+                {loggedUser?._id === params.userId && !eachList.filmDetails && (
+                  <div>
+                    <p className="add-movie-text">Click here to add a movie!</p>
+                  </div>
+                )}
               </div>
             </Link>
           </div>
