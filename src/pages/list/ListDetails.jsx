@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../../services/config";
 import { Link } from "react-router-dom";
 import Search from "../../components/Search";
 import AddMovieList from "../../components/AddMovieList";
 import { BeatLoader } from "react-spinners";
+import { AuthContext } from "../../context/auth.context";
 
 function ListDetails() {
   const params = useParams();
@@ -16,6 +17,7 @@ function ListDetails() {
   const [name, setName] = useState(null);
   const [description, setDescription] = useState(null);
   const [filmsId, setFilmsId] = useState([]);
+  const { loggedUser } = useContext(AuthContext);
 
   console.log("filmsId AQUI", filmsId);
 
@@ -28,9 +30,11 @@ function ListDetails() {
       const response = await service.get(
         `/profile/${params.userId}/lists/${params.listId}`
       );
-      const allFilmIds = response.data.filmDetails.map((eachFilm) => {
-        return eachFilm.apiId;
-      });
+      const allFilmIds =
+        response.data.filmDetails &&
+        response.data.filmDetails.map((eachFilm) => {
+          return eachFilm.apiId;
+        });
       setFilmsId(allFilmIds);
       console.log(response.data);
       setListDetails(response.data);
@@ -130,11 +134,16 @@ function ListDetails() {
         <div>
           <h3>{listDetails.name}</h3>
           <p>{listDetails.description}</p>
-          <button onClick={() => handleChangeIsEditable(listDetails._id)}>
-            Edit
-          </button>
+
+          {params.userId === loggedUser._id && (
+            <button onClick={() => handleChangeIsEditable(listDetails._id)}>
+              Edit
+            </button>
+          )}
           <br />
-          <button onClick={handleDelete}>Delete</button>
+          {params.userId === loggedUser._id && (
+            <button onClick={handleDelete}>Delete</button>
+          )}
           <Link to={`/profile/${params.userId}/lists/`}>
             <button>Back</button>
           </Link>

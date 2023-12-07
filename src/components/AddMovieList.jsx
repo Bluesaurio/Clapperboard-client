@@ -51,6 +51,17 @@ function AddMovieList(props) {
     }
   };
 
+  const handleRemoveMovie = async (resultId) => {
+    try {
+      await service.patch(
+        `/profile/lists/${props.listDetails._id}/${resultId}/delete`
+      );
+      props.getData();
+    } catch (error) {
+      console.log(error);
+      redirect("/error");
+    }
+  };
   console.log(
     "DETALLES DE LA LISTA",
     props.listDetails,
@@ -69,6 +80,11 @@ function AddMovieList(props) {
                 alt={eachMovie.title}
                 className="list-image"
               />
+              {params.userId === loggedUser._id && (
+                <button onClick={() => handleRemoveMovie(eachMovie.apiId)}>
+                  Remove movie from list
+                </button>
+              )}
             </div>
           );
         })}
@@ -96,7 +112,7 @@ function AddMovieList(props) {
                   alt={eachResult.title}
                   className="review-image"
                 />
-                {props.filmsId.includes(eachResult.id) ? (
+                {props.filmsId && props.filmsId.includes(eachResult.id) ? (
                   <p key={eachResult.id}>Movie added!</p>
                 ) : (
                   <div key={eachResult.id}>

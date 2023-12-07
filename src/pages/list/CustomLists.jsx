@@ -5,6 +5,7 @@ import service from "../../services/config";
 import { BeatLoader } from "react-spinners";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
+import ImageApi from "../../components/ImageApi";
 
 function CustomList() {
   const params = useParams();
@@ -44,7 +45,7 @@ function CustomList() {
       </div>
     );
   }
-
+  console.log("QUE TENGO AQUI", allUserLists);
   return (
     <div>
       {allUserLists.map((eachList) => {
@@ -55,7 +56,37 @@ function CustomList() {
             <Link
               to={`/profile/${params.userId}/lists/${eachList._id}/details`}
             >
-              <p>Imaginemos que esto es la imagen de la lista</p>
+              <div>
+                {eachList.filmDetails && eachList.filmDetails[0].image && (
+                  <ImageApi
+                    path={eachList.filmDetails[0].image}
+                    alt={eachList.filmDetails[0].title}
+                    className="review-image"
+                  />
+                )}
+                {eachList.filmDetails && eachList.filmDetails[1].image && (
+                  <ImageApi
+                    path={eachList.filmDetails[1].image}
+                    alt={eachList.filmDetails[1].title}
+                    className="review-image"
+                  />
+                )}
+                {eachList.filmDetails && eachList.filmDetails[2].image && (
+                  <ImageApi
+                    path={eachList.filmDetails[2].image}
+                    alt={eachList.filmDetails[2].title}
+                    className="review-image"
+                  />
+                )}
+                {eachList.filmDetails && eachList.filmDetails[3].image && (
+                  <ImageApi
+                    path={eachList.filmDetails[3].image}
+                    alt={eachList.filmDetails[3].title}
+                    className="review-image"
+                  />
+                )}
+                {!eachList.filmDetails && <p>Click here to add a movie!</p>}
+              </div>
             </Link>
           </div>
         );
