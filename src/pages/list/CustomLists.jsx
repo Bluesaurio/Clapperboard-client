@@ -91,7 +91,9 @@ function CustomList() {
           </div>
         );
       })}
-      {loggedUser._id === params.userId && <AddList getData={getData} />}
+      {loggedUser && loggedUser._id === params.userId && (
+        <AddList getData={getData} />
+      )}
     </div>
   );
 }

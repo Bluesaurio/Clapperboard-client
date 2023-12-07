@@ -81,7 +81,7 @@ function Profile() {
           </p>
         )}
         <br />
-        {loggedUser && loggedUser._id === params.userId && (
+        {loggedUser?._id === params.userId && (
           <Link to={"/profile/edit"}>
             <Button
               variant="light"

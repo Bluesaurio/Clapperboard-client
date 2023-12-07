@@ -165,7 +165,7 @@ function Reviews() {
                 </Link>
               </div>
             )}
-            {loggedUser._id === params.userId && (
+            {loggedUser && loggedUser._id === params.userId && (
               <div className="buttons-review">
                 <Button
                   type="submit"

@@ -135,13 +135,13 @@ function ListDetails() {
           <h3>{listDetails.name}</h3>
           <p>{listDetails.description}</p>
 
-          {params.userId === loggedUser._id && (
+          {loggedUser && params.userId === loggedUser._id && (
             <button onClick={() => handleChangeIsEditable(listDetails._id)}>
               Edit
             </button>
           )}
           <br />
-          {params.userId === loggedUser._id && (
+          {loggedUser && params.userId === loggedUser._id && (
             <button onClick={handleDelete}>Delete</button>
           )}
           <Link to={`/profile/${params.userId}/lists/`}>

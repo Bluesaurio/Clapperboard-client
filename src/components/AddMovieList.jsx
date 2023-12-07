@@ -80,7 +80,7 @@ function AddMovieList(props) {
                 alt={eachMovie.title}
                 className="list-image"
               />
-              {params.userId === loggedUser._id && (
+              {loggedUser && params.userId === loggedUser._id && (
                 <button onClick={() => handleRemoveMovie(eachMovie.apiId)}>
                   Remove movie from list
                 </button>
@@ -88,7 +88,7 @@ function AddMovieList(props) {
             </div>
           );
         })}
-      {params.userId === loggedUser._id && (
+      {loggedUser && params.userId === loggedUser._id && (
         <Form className="d-flex">
           <Form.Control
             type="search"
