@@ -91,8 +91,13 @@ function MovieDetails() {
             </div>
           ))}
 
-          {doIHaveAReview ||
-            (!isLoggedIn === false && <AddReview getData={getData} />)}
+          {isLoggedIn && !doIHaveAReview && <AddReview getData={getData} />}
+          {!isLoggedIn && (
+            <p>
+              Log in to add your review <Link to={"/login"}>here!</Link>
+            </p>
+          )}
+          {doIHaveAReview && <p>You have already done your Review here!</p>}
         </Col>
 
         <Col xs={12} md={4}>
