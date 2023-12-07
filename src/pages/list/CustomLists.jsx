@@ -88,6 +88,9 @@ function CustomList() {
                 {loggedUser?._id === params.userId && !eachList.filmDetails && (
                   <p>Click here to add a movie!</p>
                 )}
+                {eachList.filmDetails?.length === 0 && (
+                  <p>This list has no movies yet</p>
+                )}
               </div>
             </Link>
           </div>
