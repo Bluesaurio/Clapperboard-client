@@ -7,6 +7,7 @@ import { BeatLoader } from "react-spinners";
 
 //Bootstrap
 import { Row, Col } from "react-bootstrap";
+import ImageApi from "../../components/ImageApi";
 
 function MovieDetails() {
   const params = useParams();
@@ -63,8 +64,8 @@ function MovieDetails() {
     <div className="movie-details-container">
       <Row>
         <Col xs={12} md={4}>
-          <img
-            src={`https://www.themoviedb.org/t/p/w300/${movieDetails.poster_path}`}
+          <ImageApi
+            path={movieDetails.poster_path}
             alt={movieDetails.title}
             className="img-fluid"
           />

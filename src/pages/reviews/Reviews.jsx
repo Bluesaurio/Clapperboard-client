@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import service from "../../services/config";
 import { Rating } from "react-simple-star-rating";
 import { BeatLoader } from "react-spinners";
+import ImageApi from "../../components/ImageApi";
 
 function Reviews() {
   const params = useParams();
@@ -126,6 +127,11 @@ function Reviews() {
               <div>
                 <p>{eachReview.rating}</p>
                 <p>{eachReview.text}</p>
+                <ImageApi
+                  path={eachReview.picture}
+                  alt={eachReview.title}
+                  className="movie-image"
+                />
                 <button onClick={() => handleChangeIsEditable(eachReview._id)}>
                   Editar
                 </button>
