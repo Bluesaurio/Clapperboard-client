@@ -17,13 +17,15 @@ function Search() {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    console.log(queryValue);
     if (queryValue) {
+      redirect("/");
       redirect(`/movie/${queryValue}/results`);
     }
   };
 
   return (
-    <Form className="d-flex" onSubmit={(e) => handleSearch}>
+    <Form className="d-flex">
       <Form.Control
         type="search"
         placeholder="Search"
@@ -32,7 +34,9 @@ function Search() {
         onChange={handleQueryChange}
         value={queryValue}
       />
-      <Button variant="outline-success">Search</Button>
+      <Button onClick={handleSearch} variant="outline-success">
+        Search
+      </Button>
     </Form>
   );
 }
