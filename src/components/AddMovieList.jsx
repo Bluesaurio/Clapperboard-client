@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import service from "../services/config";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ImageApi from "./ImageApi";
+import { AuthContext } from "../context/auth.context";
 
 // Bootstrap
 import Form from "react-bootstrap/Form";
@@ -11,6 +12,8 @@ function AddMovieList(props) {
   const [queryValue, setQueryValue] = useState("");
   const [results, setResults] = useState([]);
   const [lookingForFilms, setLookingForFilms] = useState([]);
+  const { loggedUser } = useContext(AuthContext);
+  const params = useParams();
 
   useEffect(() => {
     const delayedSearch = setTimeout(() => {
@@ -69,16 +72,19 @@ function AddMovieList(props) {
             </div>
           );
         })}
-      <Form className="d-flex">
-        <Form.Control
-          type="search"
-          placeholder="Search"
-          className="me-2"
-          aria-label="Search"
-          onChange={handleQueryChange}
-          defaultValue={queryValue}
-        />
-      </Form>
+      {params.userId === loggedUser._id && (
+        <Form className="d-flex">
+          <Form.Control
+            type="search"
+            placeholder="Search"
+            className="me-2"
+            aria-label="Search"
+            onChange={handleQueryChange}
+            defaultValue={queryValue}
+          />
+        </Form>
+      )}
+
       {lookingForFilms !== "" &&
         results.map((eachResult, index) => {
           return (
