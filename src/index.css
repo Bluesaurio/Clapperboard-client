@@ -159,3 +159,12 @@ body {
   border-radius: 30px;
   border: 2px solid #fdb14d;
 }
+
+/* Styles for reviews */
+
+.review-image {
+  width: 25%;
+  height: auto;
+  border: 2px solid white;
+  border-radius: 8px;
+}

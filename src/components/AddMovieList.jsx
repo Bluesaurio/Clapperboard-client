@@ -68,7 +68,7 @@ function AddMovieList(props) {
                 <ImageApi
                   path={eachResult.poster_path}
                   alt={eachResult.title}
-                  className="movie-image"
+                  className="review-image"
                 />
                 <button onClick={(e) => handleAddMovie(index, eachResult.id)}>
                   Add to the list

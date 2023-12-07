@@ -130,7 +130,7 @@ function Reviews() {
                 <ImageApi
                   path={eachReview.picture}
                   alt={eachReview.title}
-                  className="movie-image"
+                  className="review-image"
                 />
                 <button onClick={() => handleChangeIsEditable(eachReview._id)}>
                   Editar
