@@ -25,11 +25,7 @@ function Search() {
   };
 
   return (
-<<<<<<< HEAD
     <Form className="d-flex">
-=======
-    <Form className="d-flex" onSubmit={(e) => handleSearch(e)}>
->>>>>>> 17f38007be98247e7bab5286ae63baee42956b5c
       <Form.Control
         type="search"
         placeholder="Search"
@@ -38,11 +34,7 @@ function Search() {
         onChange={handleQueryChange}
         value={queryValue}
       />
-<<<<<<< HEAD
       <Button onClick={handleSearch} variant="outline-success">
-=======
-      <Button variant="outline-success" type="submit">
->>>>>>> 17f38007be98247e7bab5286ae63baee42956b5c
         Search
       </Button>
     </Form>
