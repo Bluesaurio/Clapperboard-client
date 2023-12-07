@@ -210,3 +210,34 @@ body {
   display: grid;
   gap: 0px;
 }
+
+.list-container-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.list-container {
+  width: 25%;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.list-details {
+  text-align: center;
+}
+
+.list-image-search {
+  max-width: 75%;
+  height: auto;
+}
+
+.button-container {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.button-container button {
+  font-size: 0.8em;
+  padding: 8px;
+}

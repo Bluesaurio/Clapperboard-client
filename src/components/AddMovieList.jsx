@@ -6,6 +6,7 @@ import { AuthContext } from "../context/auth.context";
 
 // Bootstrap
 import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
 
 function AddMovieList(props) {
   const redirect = useNavigate();
@@ -71,23 +72,34 @@ function AddMovieList(props) {
 
   return (
     <div>
-      {props.listDetails.filmDetails &&
-        props.listDetails.filmDetails.map((eachMovie) => {
-          return (
-            <div key={eachMovie.apiId} className="list-container">
-              <ImageApi
-                path={eachMovie.image}
-                alt={eachMovie.title}
-                className="list-image"
-              />
-              {loggedUser && params.userId === loggedUser._id && (
-                <button onClick={() => handleRemoveMovie(eachMovie.apiId)}>
-                  Remove movie from list
-                </button>
-              )}
-            </div>
-          );
-        })}
+      <div className="list-container-wrapper">
+        {props.listDetails.filmDetails &&
+          props.listDetails.filmDetails.map((eachMovie) => {
+            return (
+              <div key={eachMovie.apiId} className="list-container">
+                <div className="list-details">
+                  <ImageApi
+                    path={eachMovie.image}
+                    alt={eachMovie.title}
+                    className="list-image-search"
+                  />
+                </div>
+                <div className="button-container">
+                  {loggedUser && params.userId === loggedUser._id && (
+                    <Button
+                      variant="danger"
+                      type="submit"
+                      style={{ border: "1px solid white", margin: "10px" }}
+                      onClick={() => handleRemoveMovie(eachMovie.apiId)}
+                    >
+                      Remove movie
+                    </Button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+      </div>
       {loggedUser && params.userId === loggedUser._id && (
         <Form className="d-flex">
           <Form.Control
