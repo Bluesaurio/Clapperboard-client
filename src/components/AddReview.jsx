@@ -48,8 +48,13 @@ function AddReview(props) {
           <Col xs={12} style={{ marginBottom: "15px" }}>
             <Rating onClick={handleRating} />
           </Col>
-          <Col xs={12} style={{ marginBottom: "15px" }}>
-            <textarea onChange={handleReviewText} value={reviewText} />
+          <Col xs={12} style={{ marginBottom: "15px", fontSize: "16px" }}>
+            <textarea
+              rows="10"
+              cols="35"
+              onChange={handleReviewText}
+              value={reviewText}
+            />
           </Col>
           <Col xs={12}>
             <Button

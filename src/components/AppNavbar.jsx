@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import Search from "./Search";
+import logoImage from "../../public/Clapperboard.png";
 
 // Bootstrap
 import Container from "react-bootstrap/Container";
@@ -29,7 +30,9 @@ function AppNavbar() {
     return (
       <Navbar expand="lg" className="bg-body-tertiary" sticky="top">
         <Container>
-          <Navbar.Brand href="/">Clapperboard</Navbar.Brand>
+          <Navbar.Brand href="/">
+            <img src={logoImage} style={{ width: "250px", height: "70px" }} />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
