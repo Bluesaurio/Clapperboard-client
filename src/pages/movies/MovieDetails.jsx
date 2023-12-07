@@ -94,7 +94,12 @@ function MovieDetails() {
                 width={100}
               />
               <p>{eachReview.text} </p>
-              <p>Review by: {eachReview.creatorId.username}</p>
+              <p>
+                Review by:{" "}
+                <Link to={`/profile/${eachReview.creatorId._id}`}>
+                  {eachReview.creatorId.username}
+                </Link>
+              </p>
             </div>
           ))}
         </Col>

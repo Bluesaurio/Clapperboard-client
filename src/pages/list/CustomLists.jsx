@@ -3,10 +3,14 @@ import AddList from "../../components/AddList";
 import { useEffect, useState } from "react";
 import service from "../../services/config";
 import { BeatLoader } from "react-spinners";
+import { useContext } from "react";
+import { AuthContext } from "../../context/auth.context";
 
 function CustomList() {
   const params = useParams();
   const redirect = useNavigate();
+
+  const { loggedUser } = useContext(AuthContext);
 
   const [allUserLists, setAllUserLists] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -56,7 +60,7 @@ function CustomList() {
           </div>
         );
       })}
-      <AddList getData={getData} />
+      {loggedUser._id === params.userId && <AddList getData={getData} />}
     </div>
   );
 }

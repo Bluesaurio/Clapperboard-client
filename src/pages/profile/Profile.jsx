@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth.context";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import service from "../../services/config";
 import { BeatLoader } from "react-spinners";
 
@@ -9,6 +9,7 @@ import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
 function Profile() {
+  const params = useParams();
   const { loggedUser } = useContext(AuthContext);
 
   const [userData, setUserData] = useState(null);
@@ -20,7 +21,7 @@ function Profile() {
 
   const getData = async () => {
     try {
-      const response = await service.get(`/profile/${loggedUser._id}`);
+      const response = await service.get(`/profile/${params.userId}`);
       console.log(response.data);
       setUserData(response.data);
       setIsLoading(false);
@@ -43,11 +44,12 @@ function Profile() {
     );
   }
 
+  console.log(userData);
   return (
     <div className="profile-container">
       <div className="profile-nav">
         <Nav defaultActiveKey="/home" className="flex-column">
-          <Nav.Link href={`/profile/${loggedUser._id}/reviews`}>
+          <Nav.Link href={`/profile/${params.userId}/reviews`}>
             Reviews
           </Nav.Link>
           <Nav.Link href={`/profile/${loggedUser._id}/favorites`}>
@@ -56,7 +58,7 @@ function Profile() {
           <Nav.Link href={`/profile/${loggedUser._id}/watchlist`}>
             Watchlist
           </Nav.Link>
-          <Nav.Link href={`/profile/${loggedUser._id}/lists`}>Lists</Nav.Link>
+          <Nav.Link href={`/profile/${params.userId}/lists`}>Lists</Nav.Link>
         </Nav>
       </div>
 
@@ -68,6 +70,11 @@ function Profile() {
             {userData.firstName} {userData.lastName}
           </p>
         )}
+        {userData.firstName && !userData.lastName && (
+          <p>{userData.firstName}</p>
+        )}
+        {!userData.firstName && userData.lastName && <p>{userData.lastName}</p>}
+
         {userData.pronouns && (
           <p>
             <strong>Pronouns:</strong> {userData.pronouns}
@@ -81,13 +88,15 @@ function Profile() {
         )}
         <br />
         <Link to={"/profile/edit"}>
-          <Button
-            variant="light"
-            type="submit"
-            style={{ backgroundColor: "#fdb14d" }}
-          >
-            Edit profile
-          </Button>
+          {loggedUser._id === params.userId && (
+            <Button
+              variant="light"
+              type="submit"
+              style={{ backgroundColor: "#fdb14d" }}
+            >
+              Edit profile
+            </Button>
+          )}
         </Link>
       </div>
     </div>
