@@ -53,11 +53,11 @@ function AddMovieList(props) {
       {props.listDetails.filmDetails &&
         props.listDetails.filmDetails.map((eachMovie) => {
           return (
-            <div key={eachMovie.apiId}>
+            <div key={eachMovie.apiId} className="list-container">
               <ImageApi
                 path={eachMovie.image}
                 alt={eachMovie.title}
-                className="review-image"
+                className="list-image"
               />
             </div>
           );
