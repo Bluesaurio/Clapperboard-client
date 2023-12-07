@@ -102,6 +102,7 @@ function Reviews() {
 
   return (
     <div>
+      {allUserReviews.length === 0 && <p>You still don't have any Review...</p>}
       {allUserReviews.map((eachReview, index) => {
         console.log(eachReview);
         return (
