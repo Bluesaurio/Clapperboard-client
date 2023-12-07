@@ -12,7 +12,7 @@ function MovieDetails() {
   const [isLoading, setIsLoading] = useState(true);
   const [allReviews, setAllReviews] = useState(null);
   const [doIHaveAReview, setDoIHaveAReview] = useState(false);
-  const { loggedUser } = useContext(AuthContext);
+  const { isLoggedIn, loggedUser } = useContext(AuthContext);
 
   useEffect(() => {
     getData();
@@ -24,14 +24,15 @@ function MovieDetails() {
         `/movie/${params.movieId}/details`
       );
       const getReviews = await service.get(`/review/${params.movieId}`);
-      const LookingForMyReviews = await service.get(
-        `/review/${params.movieId}/${loggedUser._id}`
-      );
-      console.log(getReviews);
-      if (!LookingForMyReviews.data) {
-        setDoIHaveAReview(false);
-      } else {
-        setDoIHaveAReview(true);
+      if (isLoggedIn) {
+        const LookingForMyReviews = await service.get(
+          `/review/${params.movieId}/${loggedUser._id}`
+        );
+        if (!LookingForMyReviews.data) {
+          setDoIHaveAReview(false);
+        } else {
+          setDoIHaveAReview(true);
+        }
       }
 
       setMovieDetails(movieResponse.data);
