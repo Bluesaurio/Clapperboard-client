@@ -140,9 +140,10 @@ body {
 .movie-details-container h3 {
   margin-top: 20px;
   margin-bottom: 50px;
-  background-color: gray;
+  background-color: #fdb14d;
   padding: 10px;
   border-radius: 10px;
+  color: black;
 }
 .movie-details-container h4 {
   margin-top: 20px;

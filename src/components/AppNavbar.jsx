@@ -72,7 +72,9 @@ function AppNavbar() {
     return (
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="/">Clapperboard</Navbar.Brand>
+          <Navbar.Brand href="/">
+            <img src={logoImage} style={{ width: "250px", height: "70px" }} />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
