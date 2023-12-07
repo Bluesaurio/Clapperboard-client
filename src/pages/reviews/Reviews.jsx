@@ -4,10 +4,15 @@ import service from "../../services/config";
 import { Rating } from "react-simple-star-rating";
 import { BeatLoader } from "react-spinners";
 import ImageApi from "../../components/ImageApi";
+import { useContext } from "react";
+import { AuthContext } from "../../context/auth.context";
+import { Link } from "react-router-dom";
 
 function Reviews() {
   const params = useParams();
   const redirect = useNavigate();
+  const { loggedUser } = useContext(AuthContext);
+
   const [allUserReviews, setAllUserReviews] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [idToEdit, setIdToEdit] = useState(null);
@@ -100,7 +105,7 @@ function Reviews() {
         console.log(eachReview);
         return (
           <div key={eachReview._id}>
-            {idToEdit == eachReview._id ? (
+            {idToEdit == eachReview._id && (
               <div>
                 <Rating
                   onClick={handleRating}
@@ -123,7 +128,8 @@ function Reviews() {
                   </button>
                 </form>
               </div>
-            ) : (
+            )}
+            {idToEdit !== eachReview._id && (
               <div>
                 {eachReview.rating === 5 && <p>⭐⭐⭐⭐⭐</p>}
                 {eachReview.rating === 4 && <p>⭐⭐⭐⭐</p>}
@@ -131,11 +137,17 @@ function Reviews() {
                 {eachReview.rating === 2 && <p>⭐⭐</p>}
                 {eachReview.rating === 1 && <p>⭐</p>}
                 <p>{eachReview.text}</p>
-                <ImageApi
-                  path={eachReview.picture}
-                  alt={eachReview.title}
-                  className="review-image"
-                />
+                <Link to={`/movie/${eachReview.filmId}/details`}>
+                  <ImageApi
+                    path={eachReview.picture}
+                    alt={eachReview.title}
+                    className="review-image"
+                  />
+                </Link>
+              </div>
+            )}
+            {loggedUser._id === params.userId && (
+              <div>
                 <button onClick={() => handleChangeIsEditable(eachReview._id)}>
                   Editar
                 </button>
