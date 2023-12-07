@@ -15,6 +15,9 @@ function ListDetails() {
   const [idToEdit, setIdToEdit] = useState(null);
   const [name, setName] = useState(null);
   const [description, setDescription] = useState(null);
+  const [filmsId, setFilmsId] = useState([]);
+
+  console.log("filmsId AQUI", filmsId);
 
   useEffect(() => {
     getData();
@@ -25,6 +28,10 @@ function ListDetails() {
       const response = await service.get(
         `/profile/${params.userId}/lists/${params.listId}`
       );
+      const allFilmIds = response.data.filmDetails.map((eachFilm) => {
+        return eachFilm.apiId;
+      });
+      setFilmsId(allFilmIds);
       console.log(response.data);
       setListDetails(response.data);
       setIsLoading(false);
@@ -133,7 +140,11 @@ function ListDetails() {
           </Link>
         </div>
       )}
-      <AddMovieList getData={getData} listDetails={listDetails} />
+      <AddMovieList
+        getData={getData}
+        listDetails={listDetails}
+        filmsId={filmsId}
+      />
     </div>
   );
 }

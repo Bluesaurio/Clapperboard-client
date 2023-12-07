@@ -90,19 +90,15 @@ function AddMovieList(props) {
                   alt={eachResult.title}
                   className="review-image"
                 />
-                {props.listDetails.filmDetails.map((eachMovie, index) => {
-                  if (eachMovie.apiId[index] === eachResult.id) {
-                    return <p key={eachMovie.apiId}>Movie added!</p>;
-                  } else {
-                    return (
-                      <div key={eachMovie.apiId}>
-                        <button onClick={() => handleAddMovie(eachResult.id)}>
-                          Add to the list
-                        </button>
-                      </div>
-                    );
-                  }
-                })}
+                {props.filmsId.includes(eachResult.id) ? (
+                  <p key={eachResult.id}>Movie added!</p>
+                ) : (
+                  <div key={eachResult.id}>
+                    <button onClick={() => handleAddMovie(eachResult.id)}>
+                      Add to the list
+                    </button>
+                  </div>
+                )}
               </div>
               <br />
             </div>
