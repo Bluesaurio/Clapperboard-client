@@ -161,21 +161,18 @@ body {
 }
 
 /* Styles for reviews */
+
 .review-image {
-  width: 25%;
+  width: 15%;
   height: auto;
   border: 2px solid white;
   border-radius: 8px;
 }
 
+/* Styles for custom lists */
 .list-image {
   width: 10%;
   height: auto;
   border: 2px solid white;
   border-radius: 8px;
-}
-
-.list-container {
-  display: flex;
-  flex-direction: row;
 }
