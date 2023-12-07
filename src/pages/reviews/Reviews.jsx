@@ -7,6 +7,7 @@ import ImageApi from "../../components/ImageApi";
 import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 function Reviews() {
   const params = useParams();
@@ -136,7 +137,12 @@ function Reviews() {
                 {eachReview.rating === 3 && <p>⭐⭐⭐</p>}
                 {eachReview.rating === 2 && <p>⭐⭐</p>}
                 {eachReview.rating === 1 && <p>⭐</p>}
-                <p>{eachReview.text}</p>
+                <p>
+                  {" "}
+                  <strong>Review:</strong>
+                  <br />
+                  {eachReview.text}
+                </p>
                 <Link to={`/movie/${eachReview.filmId}/details`}>
                   <ImageApi
                     path={eachReview.picture}
@@ -148,12 +154,27 @@ function Reviews() {
             )}
             {loggedUser._id === params.userId && (
               <div>
-                <button onClick={() => handleChangeIsEditable(eachReview._id)}>
-                  Editar
-                </button>
-                <button onClick={() => handleDelete(index, eachReview._id)}>
+                <Button
+                  type="submit"
+                  style={{
+                    backgroundColor: "#fdb14d",
+                    border: "1px solid white",
+                    color: "black",
+                    margin: "10px",
+                  }}
+                  onClick={() => handleChangeIsEditable(eachReview._id)}
+                >
+                  Edit profile
+                </Button>
+
+                <Button
+                  variant="danger"
+                  type="submit"
+                  style={{ border: "1px solid white", margin: "10px" }}
+                  onClick={() => handleDelete(eachReview._id)}
+                >
                   Delete
-                </button>
+                </Button>
               </div>
             )}
           </div>
