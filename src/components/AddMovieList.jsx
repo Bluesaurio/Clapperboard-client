@@ -6,6 +6,7 @@ import { AuthContext } from "../context/auth.context";
 
 // Bootstrap
 import Form from "react-bootstrap/Form";
+import { Button } from "react-bootstrap";
 
 function AddMovieList(props) {
   const redirect = useNavigate();
@@ -71,61 +72,87 @@ function AddMovieList(props) {
 
   return (
     <div>
-      {props.listDetails.filmDetails &&
-        props.listDetails.filmDetails.map((eachMovie) => {
-          return (
-            <div key={eachMovie.apiId} className="list-container">
-              <ImageApi
-                path={eachMovie.image}
-                alt={eachMovie.title}
-                className="list-image"
-              />
-              {loggedUser && params.userId === loggedUser._id && (
-                <button onClick={() => handleRemoveMovie(eachMovie.apiId)}>
-                  Remove movie from list
-                </button>
-              )}
-            </div>
-          );
-        })}
-      {loggedUser && params.userId === loggedUser._id && (
-        <Form className="d-flex">
-          <Form.Control
-            type="search"
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-            onChange={handleQueryChange}
-            defaultValue={queryValue}
-          />
-        </Form>
-      )}
-
-      {lookingForFilms !== "" &&
-        results.map((eachResult, index) => {
-          return (
-            <div key={index}>
-              {eachResult.title}
-              <div>
-                <ImageApi
-                  path={eachResult.poster_path}
-                  alt={eachResult.title}
-                  className="review-image"
-                />
-                {props.filmsId && props.filmsId.includes(eachResult.id) ? (
-                  <p key={eachResult.id}>Movie added!</p>
-                ) : (
-                  <div key={eachResult.id}>
-                    <button onClick={() => handleAddMovie(eachResult.id)}>
-                      Add to the list
-                    </button>
-                  </div>
-                )}
+      <div className="list-container-wrapper">
+        {props.listDetails.filmDetails &&
+          props.listDetails.filmDetails.map((eachMovie) => {
+            return (
+              <div key={eachMovie.apiId} className="list-container">
+                <div className="list-details">
+                  <ImageApi
+                    path={eachMovie.image}
+                    alt={eachMovie.title}
+                    className="list-image-search"
+                  />
+                </div>
+                <div className="button-container">
+                  {loggedUser && params.userId === loggedUser._id && (
+                    <Button
+                      variant="danger"
+                      type="submit"
+                      style={{ border: "1px solid white", margin: "10px" }}
+                      onClick={() => handleRemoveMovie(eachMovie.apiId)}
+                    >
+                      Remove movie
+                    </Button>
+                  )}
+                </div>
               </div>
-              <br />
-            </div>
-          );
-        })}
+            );
+          })}
+      </div>
+      <div>
+        {loggedUser && params.userId === loggedUser._id && (
+          <Form className="d-flex">
+            <Form.Control
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+              onChange={handleQueryChange}
+              defaultValue={queryValue}
+            />
+          </Form>
+        )}
+      </div>
+      <div className="movie-results-container">
+        {lookingForFilms !== "" &&
+          results.map((eachResult, index) => {
+            return (
+              <div key={index} className="movie-results-item">
+                <h5> {eachResult.title}</h5>
+                <div className="movie-results-details">
+                  <ImageApi
+                    path={eachResult.poster_path}
+                    alt={eachResult.title}
+                    className="movie-results-image"
+                  />
+                  {props.filmsId && props.filmsId.includes(eachResult.id) ? (
+                    <p key={eachResult.id} className="movie-results-message">
+                      Movie added!
+                    </p>
+                  ) : (
+                    <div
+                      key={eachResult.id}
+                      className="movie-results-button-container"
+                    >
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        onClick={() => handleAddMovie(eachResult.id)}
+                      >
+                        Add to the list
+                      </Button>
+                      {/* <button onClick={() => handleAddMovie(eachResult.id)}>
+                        Add to the list
+                      </button> */}
+                    </div>
+                  )}
+                </div>
+                <br />
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 }

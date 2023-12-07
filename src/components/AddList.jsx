@@ -1,6 +1,10 @@
 import { useState } from "react";
 import service from "../services/config";
 import { useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+//Bootstrap
+import { Container, Form, Button } from "react-bootstrap";
 
 function AddList(props) {
   const params = useParams();
@@ -35,37 +39,56 @@ function AddList(props) {
     }
   };
 
+  // Styles
+  const containerStyle = {
+    maxWidth: "600px",
+    backgroundColor: "grey",
+    padding: "20px",
+    borderRadius: "8px",
+  };
+
   return (
     <div>
-      <h4>Create your lists</h4>
-      <form onSubmit={handleSubmit}>
-        <label>Give a name to your list: </label>
+      <Container className="text-center" style={containerStyle}>
+        <h4>Create your lists</h4>
         <br />
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formListName">
+            <Form.Label>Give a name to your list</Form.Label>
+            <Form.Control type="text" value={name} onChange={handleListName} />
+          </Form.Group>
 
-        <input type="text" value={name} onChange={handleListName} />
-        <br />
-        <br />
+          <Form.Group controlId="formDescription">
+            <Form.Label>What's your list about?</Form.Label>
+            <Form.Control
+              as="textarea"
+              value={description}
+              onChange={handleDescription}
+            />
+          </Form.Group>
 
-        <label>What's your list about?: </label>
-        <br />
-
-        <textarea value={description} onChange={handleDescription}></textarea>
-        <br />
-        <br />
-
-        <label>What type of list is it?: </label>
-        <br />
-
-        <select value={category} onChange={handleCategory}>
-          <option value="Custom">Custom</option>
-          <option value="Favorites">Favorites</option>
-          <option value="Watchlist">Watchlist</option>
-        </select>
-        <br />
-        <br />
-
-        <button type="submit">Create it</button>
-      </form>
+          <Form.Group controlId="formCategory">
+            <Form.Label>What type of list is it?</Form.Label>
+            <Form.Control
+              as="select"
+              value={category}
+              onChange={handleCategory}
+            >
+              <option value="Custom">Custom</option>
+              <option value="Favorites">Favorites</option>
+              <option value="Watchlist">Watchlist</option>
+            </Form.Control>
+          </Form.Group>
+          <br />
+          <Button
+            variant="light"
+            type="submit"
+            style={{ backgroundColor: "#fdb14d" }}
+          >
+            Create
+          </Button>
+        </Form>
+      </Container>
     </div>
   );
 }

@@ -100,6 +100,7 @@ function CustomList() {
                 )}
               </div>
             </Link>
+            <hr />
           </div>
         );
       })}
