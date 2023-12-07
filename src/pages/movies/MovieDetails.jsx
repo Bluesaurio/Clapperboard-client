@@ -19,7 +19,7 @@ function MovieDetails() {
   useEffect(() => {
     getData();
   }, []);
-
+  console.log(allReviews);
   const getData = async () => {
     try {
       const movieResponse = await service.get(
@@ -80,13 +80,18 @@ function MovieDetails() {
               {eachReview.rating === 3 && <p>⭐⭐⭐</p>}
               {eachReview.rating === 2 && <p>⭐⭐</p>}
               {eachReview.rating === 1 && <p>⭐</p>}
-
+              <img
+                src={eachReview.creatorId.profilePic}
+                alt={eachReview.creatorId.username}
+                width={100}
+              />
               <p>{eachReview.text} </p>
               <p>Review by: {eachReview.creatorId.username}</p>
             </div>
           ))}
 
-          {doIHaveAReview === false && <AddReview getData={getData} />}
+          {doIHaveAReview ||
+            (!isLoggedIn === false && <AddReview getData={getData} />)}
         </Col>
 
         <Col xs={12} md={4}>

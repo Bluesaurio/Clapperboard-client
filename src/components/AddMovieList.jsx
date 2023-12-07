@@ -63,11 +63,14 @@ function AddMovieList(props) {
           return (
             <div key={index}>
               {eachResult.title}
-              <Link onClick={(e) => handleAddMovie(index, eachResult.id)}>
+              <div>
                 <img
                   src={`https://www.themoviedb.org/t/p/w200/${eachResult.poster_path}`}
                 ></img>
-              </Link>
+                <button onClick={(e) => handleAddMovie(index, eachResult.id)}>
+                  Add to the list
+                </button>
+              </div>
               <br />
             </div>
           );
