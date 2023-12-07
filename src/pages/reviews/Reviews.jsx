@@ -112,21 +112,34 @@ function Reviews() {
                   onClick={handleRating}
                   initialValue={eachReview.rating}
                 />
-                <form onSubmit={(e) => handleSubmit(e, eachReview._id)}>
+                <form
+                  className="review-form"
+                  onSubmit={(e) => handleSubmit(e, eachReview._id)}
+                >
                   <textarea
+                    className="textarea-container"
                     name={eachReview.text}
                     cols="30"
                     rows="10"
                     onChange={handleReviewText}
                     defaultValue={eachReview.text}
                   ></textarea>
-                  <button disabled={!text || !rating} type="submit">
+                  <Button
+                    disabled={!text || !rating}
+                    type="submit"
+                    variant="success"
+                    className="buttons-review"
+                  >
                     Submit changes
-                  </button>
-                  <br />
-                  <button onClick={() => handleChangeIsEditable(null)}>
+                  </Button>
+                  <Button
+                    onClick={() => handleChangeIsEditable(null)}
+                    variant="light"
+                    className="buttons-review"
+                  >
                     Back
-                  </button>
+                  </Button>
+                  <br />
                 </form>
               </div>
             )}
@@ -153,7 +166,7 @@ function Reviews() {
               </div>
             )}
             {loggedUser._id === params.userId && (
-              <div>
+              <div className="buttons-review">
                 <Button
                   type="submit"
                   style={{
@@ -164,7 +177,7 @@ function Reviews() {
                   }}
                   onClick={() => handleChangeIsEditable(eachReview._id)}
                 >
-                  Edit profile
+                  Edit review
                 </Button>
 
                 <Button

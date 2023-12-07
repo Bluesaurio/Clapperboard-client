@@ -163,10 +163,27 @@ body {
 /* Styles for reviews */
 
 .review-image {
-  width: 15%;
+  width: 25%;
   height: auto;
   border: 2px solid white;
   border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.buttons-review {
+  margin-bottom: 30px;
+}
+
+.review-form {
+  max-width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textarea-container {
+  margin-bottom: 20px;
 }
 
 /* Styles for custom lists */
