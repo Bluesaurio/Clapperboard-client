@@ -7,7 +7,6 @@ import Register from "./pages/auth/Register";
 import Login from "./pages/auth/Login";
 import Error from "./pages/error/Error";
 import NotFound from "./pages/error/NotFound";
-import About from "./pages/About";
 import Profile from "./pages/profile/Profile";
 import ProfileEdit from "./pages/profile/ProfileEdit";
 import MovieDetails from "./pages/movies/MovieDetails";
@@ -50,7 +49,6 @@ function App() {
           }
         />
 
-        <Route path="/about" element={<About />} />
         <Route path="/profile/:userId" element={<Profile />} />
 
         <Route

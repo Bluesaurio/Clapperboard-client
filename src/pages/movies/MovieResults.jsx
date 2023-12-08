@@ -12,7 +12,7 @@ function MovieResults() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [params.search]);
 
   const getData = async () => {
     try {

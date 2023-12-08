@@ -36,7 +36,6 @@ function AppNavbar() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/about">About</Nav.Link>
               <NavDropdown title="Profile" id="collapsible-nav-dropdown">
                 <NavDropdown.Item href={`/profile/${loggedUser._id}`}>
                   Profile
@@ -48,8 +47,6 @@ function AppNavbar() {
                 <NavDropdown.Item href={`/profile/${loggedUser._id}/lists`}>
                   Lists
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/">Favorites</NavDropdown.Item>
-                <NavDropdown.Item href="/">Watchlist</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <Button
                   variant="outline-danger"
@@ -78,7 +75,6 @@ function AppNavbar() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="/login">Log In</Nav.Link>
               <Nav.Link href="/register">Create Account</Nav.Link>
             </Nav>

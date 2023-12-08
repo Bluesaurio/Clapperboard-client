@@ -17,7 +17,6 @@ function Search() {
     e.preventDefault();
     if (queryValue) {
       redirect(`/movie/${queryValue}/results`);
-      window.location.reload(); // Para "refrescar" la pagina tras la busqueda
       setQueryValue("");
     }
   };
