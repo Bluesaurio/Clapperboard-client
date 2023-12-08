@@ -48,9 +48,13 @@ function ProfileEdit() {
 
   const getData = async () => {
     try {
-      await service.get(`/profile/${loggedUser._id}`);
+      const response = await service.get(`/profile/${loggedUser._id}`);
+      setUserData(response.data);
       setIsLoading(false);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      redirect("/error");
+    }
   };
 
   const handleSubmit = async (e) => {
