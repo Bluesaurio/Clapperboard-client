@@ -7,16 +7,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/auth.context";
 import ImageApi from "../../components/ImageApi";
 
-import { Container, Row, Col } from "react-bootstrap";
-
 function CustomList() {
-  const params = useParams();
-  const redirect = useNavigate();
-
-  const { loggedUser } = useContext(AuthContext);
-
   const [allUserLists, setAllUserLists] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const params = useParams();
+  const redirect = useNavigate();
+  const { loggedUser } = useContext(AuthContext);
 
   useEffect(() => {
     getData();
@@ -25,7 +22,6 @@ function CustomList() {
   const getData = async () => {
     try {
       const response = await service.get(`/profile/${params.userId}/lists`);
-      console.log(response.data);
       setAllUserLists(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -47,7 +43,7 @@ function CustomList() {
       </div>
     );
   }
-  console.log("QUE TENGO AQUI", allUserLists);
+
   return (
     <div>
       {allUserLists.map((eachList) => {

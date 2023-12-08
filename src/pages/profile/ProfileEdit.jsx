@@ -10,26 +10,21 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
 function ProfileEdit() {
-  const { loggedUser } = useContext(AuthContext);
-
-  const redirect = useNavigate();
-
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [imageUrl, setImageUrl] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
+  const { loggedUser } = useContext(AuthContext);
+  const redirect = useNavigate();
+
   const handleInputChange = (e) => {
     const clone = JSON.parse(JSON.stringify(userData));
-
     clone[e.target.name] = e.target.value;
-
     setUserData(clone);
   };
 
   const handleFileUpload = async (e) => {
-    console.log("The file to be uploaded is: ", e.target.files[0]);
-
     if (!e.target.files[0]) {
       return;
     }
@@ -40,11 +35,9 @@ function ProfileEdit() {
 
     try {
       const response = await service.patch("/profile/image", uploadData);
-
       setImageUrl(response.data.imageUrl);
       setIsUploading(false);
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };
@@ -55,23 +48,18 @@ function ProfileEdit() {
 
   const getData = async () => {
     try {
-      const response = await service.get(`/profile/${loggedUser._id}`);
-      setUserData(response.data);
+      await service.get(`/profile/${loggedUser._id}`);
       setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await service.put("/profile", userData);
-      console.log(response);
+      await service.put("/profile", userData);
       redirect(`/profile/${loggedUser._id}`);
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };

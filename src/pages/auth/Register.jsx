@@ -9,23 +9,20 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
 function Register() {
-  const { authenticateUser } = useContext(AuthContext);
-  const redirect = useNavigate();
-
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const { authenticateUser } = useContext(AuthContext);
+  const redirect = useNavigate();
+
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
-
   const handleSignup = async (e) => {
     e.preventDefault();
-
     const newUser = { username, email, password };
-
     try {
       await service.post("/auth/register", newUser);
 
@@ -36,11 +33,8 @@ function Register() {
 
       await authenticateUser();
 
-      redirect("/"); //! TEMPORAL (o no..)
+      redirect("/");
     } catch (error) {
-      // console.log(error);
-      // console.log(error.response.status);
-      // console.log(error.response.data.errorMessage);
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage);
       } else {

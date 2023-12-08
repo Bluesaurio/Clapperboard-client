@@ -10,15 +10,15 @@ import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 function Reviews() {
-  const params = useParams();
-  const redirect = useNavigate();
-  const { loggedUser } = useContext(AuthContext);
-
   const [allUserReviews, setAllUserReviews] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [idToEdit, setIdToEdit] = useState(null);
   const [rating, setRating] = useState(null);
   const [text, setText] = useState(null);
+
+  const params = useParams();
+  const redirect = useNavigate();
+  const { loggedUser } = useContext(AuthContext);
 
   useEffect(() => {
     getData();
@@ -27,11 +27,9 @@ function Reviews() {
   const getData = async () => {
     try {
       const response = await service.get(`/profile/${params.userId}/reviews`);
-      console.log(response.data);
       setAllUserReviews(response.data);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };
@@ -41,7 +39,6 @@ function Reviews() {
   };
 
   const handleRating = (rate) => {
-    console.log(rate);
     setRating(rate);
   };
 
@@ -53,34 +50,28 @@ function Reviews() {
       text,
     };
 
-    console.log("Este es el updated", updatedReview);
-
     try {
       await service.put(`/review/${reviewId}`, updatedReview);
-
       getData();
       setRating(null);
       setText(null);
       setIdToEdit(null);
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };
 
   const handleDelete = async (reviewId) => {
-    console.log(reviewId);
     try {
       await service.delete(`/review/${reviewId}`);
       getData();
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };
 
   const handleChangeIsEditable = (reviewId) => {
-    // para limpiar los campos de estados de reseñàs a editar al cambier de edit o cerrar edit
+    // para limpiar los campos de estados de reseñàs a editar al cambiar de edit o cerrar edit
     setRating(null);
     setText(null);
     setIdToEdit(reviewId);
@@ -104,7 +95,6 @@ function Reviews() {
     <div>
       {allUserReviews.length === 0 && <p>You still don't have any Review...</p>}
       {allUserReviews.map((eachReview, index) => {
-        console.log(eachReview);
         return (
           <div key={eachReview._id}>
             {idToEdit == eachReview._id && (

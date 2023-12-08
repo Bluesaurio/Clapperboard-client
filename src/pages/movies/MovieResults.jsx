@@ -17,12 +17,9 @@ function MovieResults() {
   const getData = async () => {
     try {
       const response = await service.get(`/movie/${params.search}/results`);
-      console.log(response.data.results);
       setMoviesFound(response.data.results);
       setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   if (isLoading) {

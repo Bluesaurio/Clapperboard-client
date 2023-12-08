@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth.context";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import service from "../../services/config";
 import { BeatLoader } from "react-spinners";
 
@@ -9,11 +9,11 @@ import { Nav } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
 function Profile() {
-  const params = useParams();
-  const { loggedUser } = useContext(AuthContext);
-
   const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const params = useParams();
+  const { loggedUser } = useContext(AuthContext);
 
   useEffect(() => {
     getData();
@@ -22,12 +22,9 @@ function Profile() {
   const getData = async () => {
     try {
       const response = await service.get(`/profile/${params.userId}`);
-      console.log(response.data);
       setUserData(response.data);
       setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   if (isLoading) {
@@ -44,7 +41,6 @@ function Profile() {
     );
   }
 
-  console.log(userData);
   return (
     <div className="profile-container">
       <div className="profile-nav">

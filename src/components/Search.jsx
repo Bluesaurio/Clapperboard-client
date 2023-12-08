@@ -7,20 +7,17 @@ import Button from "react-bootstrap/Button";
 
 function Search() {
   const [queryValue, setQueryValue] = useState("");
-
   const redirect = useNavigate();
 
   const handleQueryChange = (event) => {
-    console.log(event.target.value);
     setQueryValue(event.target.value);
   };
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log(queryValue);
     if (queryValue) {
       redirect(`/movie/${queryValue}/results`);
-      window.location.reload(); // apaño para "refrescar" la pagina tras la busqueda
+      window.location.reload(); // Para "refrescar" la pagina tras la busqueda
       setQueryValue("");
     }
   };

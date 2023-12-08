@@ -1,14 +1,11 @@
 import { useState } from "react";
 import service from "../services/config";
-import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //Bootstrap
 import { Container, Form, Button } from "react-bootstrap";
 
 function AddList(props) {
-  const params = useParams();
-  console.log(params.userId);
   const redirect = useNavigate();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -27,14 +24,11 @@ function AddList(props) {
     e.preventDefault();
 
     const customList = { name, description, category };
-    console.log(customList);
 
     try {
-      const response = await service.post(`/profile/lists`, customList);
+      await service.post(`/profile/lists`, customList);
       props.getData();
-      console.log(response);
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };

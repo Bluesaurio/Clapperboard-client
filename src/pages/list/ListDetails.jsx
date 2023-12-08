@@ -2,25 +2,22 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../../services/config";
 import { Link } from "react-router-dom";
-import Search from "../../components/Search";
 import AddMovieList from "../../components/AddMovieList";
 import { BeatLoader } from "react-spinners";
 import { AuthContext } from "../../context/auth.context";
 import { Button } from "react-bootstrap";
 
 function ListDetails() {
-  const params = useParams();
-  const redirect = useNavigate();
-
   const [listDetails, setListDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [idToEdit, setIdToEdit] = useState(null);
   const [name, setName] = useState(null);
   const [description, setDescription] = useState(null);
   const [filmsId, setFilmsId] = useState([]);
-  const { loggedUser } = useContext(AuthContext);
 
-  console.log("filmsId AQUI", filmsId);
+  const params = useParams();
+  const redirect = useNavigate();
+  const { loggedUser } = useContext(AuthContext);
 
   useEffect(() => {
     getData();
@@ -37,11 +34,9 @@ function ListDetails() {
           return eachFilm.apiId;
         });
       setFilmsId(allFilmIds);
-      console.log(response.data);
       setListDetails(response.data);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };
@@ -73,7 +68,6 @@ function ListDetails() {
       setDescription(null);
       setIdToEdit(null);
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };
@@ -82,7 +76,6 @@ function ListDetails() {
       await service.delete(`/profile/${params.userId}/lists/${params.listId}`);
       redirect(`/profile/${params.userId}/lists/`);
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };

@@ -12,12 +12,10 @@ function AuthWrapper(props) {
   const authenticateUser = async () => {
     try {
       const response = await service.get("auth/verify");
-      console.log(response);
       setIsLoggedIn(true);
       setIsLoading(false);
       setLoggedUser(response.data.payload);
     } catch (error) {
-      console.log(error);
       setIsLoggedIn(false);
       setIsLoading(false);
       setLoggedUser(null);

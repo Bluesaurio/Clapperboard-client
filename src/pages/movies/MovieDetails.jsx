@@ -10,17 +10,18 @@ import { Row, Col } from "react-bootstrap";
 import ImageApi from "../../components/ImageApi";
 
 function MovieDetails() {
-  const params = useParams();
   const [movieDetails, setMovieDetails] = useState([null]);
   const [isLoading, setIsLoading] = useState(true);
   const [allReviews, setAllReviews] = useState(null);
   const [doIHaveAReview, setDoIHaveAReview] = useState(false);
+
+  const params = useParams();
   const { isLoggedIn, loggedUser } = useContext(AuthContext);
 
   useEffect(() => {
     getData();
   }, []);
-  console.log(allReviews);
+
   const getData = async () => {
     try {
       const movieResponse = await service.get(
@@ -41,9 +42,7 @@ function MovieDetails() {
       setMovieDetails(movieResponse.data);
       setAllReviews(getReviews.data);
       setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   if (isLoading) {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../services/config";
 import { Rating } from "react-simple-star-rating";
@@ -17,23 +17,19 @@ function AddReview(props) {
   };
 
   const handleRating = (rate) => {
-    console.log(rate);
     setRating(rate);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const filmReview = { rating, text: reviewText };
-    console.log(filmReview);
     try {
       const response = await service.post(
         `/review/${params.movieId}`,
         filmReview
       );
       props.getData();
-      console.log(response);
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };

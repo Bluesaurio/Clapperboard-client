@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import service from "../services/config";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ImageApi from "./ImageApi";
 import { AuthContext } from "../context/auth.context";
 
@@ -16,6 +16,8 @@ function AddMovieList(props) {
   const { loggedUser } = useContext(AuthContext);
   const params = useParams();
 
+  // TimeOut para buscar a medida que escribes. El timeout vuelve a empezar cada vez que el campo de busqueda (lookingForFilms) se vuelve a rellenar
+
   useEffect(() => {
     const delayedSearch = setTimeout(() => {
       getApiResults();
@@ -26,14 +28,9 @@ function AddMovieList(props) {
   const getApiResults = async () => {
     try {
       const response = await service.get(`/movie/${queryValue}/results`);
-      console.log(response.data);
       setResults(response.data.results);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
-
-  console.log(results);
 
   const handleQueryChange = async (e) => {
     setQueryValue(e.target.value);
@@ -47,7 +44,6 @@ function AddMovieList(props) {
       );
       props.getData();
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };
@@ -59,16 +55,9 @@ function AddMovieList(props) {
       );
       props.getData();
     } catch (error) {
-      console.log(error);
       redirect("/error");
     }
   };
-  console.log(
-    "DETALLES DE LA LISTA",
-    props.listDetails,
-    "DETALLES DE LA BUSQUEDA",
-    results
-  );
 
   return (
     <div>

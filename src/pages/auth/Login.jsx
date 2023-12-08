@@ -9,34 +9,28 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 
 function Login() {
-  const { authenticateUser } = useContext(AuthContext);
-
-  const redirect = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { authenticateUser } = useContext(AuthContext);
+  const redirect = useNavigate();
 
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
-
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       const credentials = { username, password };
       const response = await service.post("/auth/login", credentials);
-      console.log(response);
 
       localStorage.setItem("authToken", response.data.authToken);
 
       await authenticateUser();
 
-      redirect("/"); //! TEMPORAL (o no...)
+      redirect("/");
     } catch (error) {
-      console.log(error);
-      console.log(error.response.status);
-      console.log(error.response.data.errorMessage);
       if (error.response && error.response.status === 400) {
         setErrorMessage(error.response.data.errorMessage);
       } else {
