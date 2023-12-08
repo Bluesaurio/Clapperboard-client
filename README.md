@@ -2,7 +2,7 @@
 
 ## [See the App!](https://clapperboard-app.netlify.app/)
 
-![App Logo](public\ClapperboardBold.png)
+![App Logo](./public/ClapperboardBold.png)
 
 ## Description
 
